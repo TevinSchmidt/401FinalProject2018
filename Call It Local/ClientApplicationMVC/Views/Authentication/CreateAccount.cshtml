@@ -12,3 +12,33 @@
 <h2>@ViewBag.Title</h2>
 
 <!-- The remainder of this file is to be completed by students in milestone 2 -->
+
+@using (Html.BeginForm("CreateAccount", "Authentication", FormMethod.Get,
+    new { id = "accountCreationForm", onsubmit = "return validateCreationForm()" }))
+{
+    <br />
+    <label for="username">Username:</label>
+    @Html.TextBox("username")
+    <br />
+    <label>Email:</label>
+    @Html.TextBox("email")
+    <br />
+    <label for="password">Password:</label>
+    @Html.Password("password")
+    <br />
+    <label for="confirmPassword">Confirm Password:</label>
+    @Html.Password("confirmPassword")
+    <br />
+    <input type="submit" value="Create Account" />
+    <br />
+    <p>@ViewBag.CreationMessage</p>
+    <br />
+}
+
+@using (Html.BeginForm("CreationConfirmPage", "Authentication", FormMethod.Get,
+    new { id = "creationConfirm" }))
+{
+  
+    <p>@ViewBag.Confirmation</p>
+    
+}
