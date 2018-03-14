@@ -40,6 +40,10 @@
         <td>@Html.TextBox("address")</td>
     </tr>
     <tr>
+        <td>Phone Number:</td>
+        <td>@Html.TextBox("phonenumber")</td>
+    </tr>
+    <tr>
         <td>User Type:</td>
         <td>@Html.DropDownList("users", new SelectList(Enum.GetValues(typeof(AccountType))), "Select Type")</td>
     </tr>
