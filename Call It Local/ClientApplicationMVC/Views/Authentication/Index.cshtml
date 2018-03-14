@@ -10,5 +10,29 @@
 }
 
 <h2>@ViewBag.Title</h2>
+<h3>@ViewBag.Message</h3>
 
 <!-- The remainder of this file is to be completed by students in milestone 2 -->
+
+@using (Html.BeginForm("LogIn", "Authentication", FormMethod.Get,
+    new { id = "credentialForm", onsubmit = "return validatecredentialForm()" }))
+{
+<table>
+    <tr>
+        <td>Username:</td>
+        <td>@Html.TextBox("Username")</td>
+    </tr>
+    <tr>
+        <td>Password:</td>
+        <td>@Html.Password("Password")</td>
+    </tr>
+</table>
+
+    <input type="submit" value="Log In" />
+    <br />
+    <a href="http://localhost:57469/Authentication/CreateAccount/">Create an Account?</a>
+    <br />
+    <p>@ViewBag.LoginResponse</p>
+    <br />
+
+}
