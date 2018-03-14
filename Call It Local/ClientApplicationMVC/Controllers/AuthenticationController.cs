@@ -32,14 +32,14 @@ namespace ClientApplicationMVC.Controllers
 
         public ActionResult CreateAccount()
         {
-            
             return View("CreateAccount");
         }
 
-        public ActionResult CreationConfirmPage()
+        public ActionResult CreationConfirmationPage()
         {
+
             ViewBag.Confirmation = "Account Created";
-            return View("CreationComplete");
+            return View("CreationConfirmationPage");
         }
 		
 		//This class is incomplete and should be completed by the students in milestone 2

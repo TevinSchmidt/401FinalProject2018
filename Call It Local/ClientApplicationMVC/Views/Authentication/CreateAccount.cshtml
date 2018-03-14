@@ -13,32 +13,44 @@
 
 <!-- The remainder of this file is to be completed by students in milestone 2 -->
 
-@using (Html.BeginForm("CreateAccount", "Authentication", FormMethod.Get,
+@using Messages.DataTypes
+
+@using (Html.BeginForm("CreationConfirmationPage", "Authentication", FormMethod.Get,
     new { id = "accountCreationForm", onsubmit = "return validateCreationForm()" }))
 {
-    <br />
-    <label for="username">Username:</label>
-    @Html.TextBox("username")
-    <br />
-    <label>Email:</label>
-    @Html.TextBox("email")
-    <br />
-    <label for="password">Password:</label>
-    @Html.Password("password")
-    <br />
-    <label for="confirmPassword">Confirm Password:</label>
-    @Html.Password("confirmPassword")
+<table>
+    <tr>
+        <td>Username:</td>
+        <td>@Html.TextBox("username")</td>
+    </tr>
+    <tr>
+        <td>Email:</td>
+        <td>@Html.TextBox("email")</td>
+    </tr>
+    <tr>
+        <td>Password:</td>
+        <td>@Html.Password("password")</td>
+    </tr>
+    <tr>
+        <td>Confirm Password:</td>
+        <td>@Html.Password("confirmPassword")</td>
+    </tr>
+    <tr>
+        <td>Address:</td>
+        <td>@Html.TextBox("address")</td>
+    </tr>
+    <tr>
+        <td>User Type:</td>
+        <td>@Html.DropDownList("users", new SelectList(Enum.GetValues(typeof(AccountType))), "Select Type")</td>
+    </tr>
+
+</table>
+
     <br />
     <input type="submit" value="Create Account" />
     <br />
     <p>@ViewBag.CreationMessage</p>
     <br />
+
 }
 
-@using (Html.BeginForm("CreationConfirmPage", "Authentication", FormMethod.Get,
-    new { id = "creationConfirm" }))
-{
-  
-    <p>@ViewBag.Confirmation</p>
-    
-}

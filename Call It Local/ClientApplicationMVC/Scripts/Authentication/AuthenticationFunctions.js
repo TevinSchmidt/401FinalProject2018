@@ -7,4 +7,6 @@ function validatecredentialForm() {
 
 function validateCreationForm() {
     //must error check new user creation
+
+    return view("CreationConfirmationPage");
 }
