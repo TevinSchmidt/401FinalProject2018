@@ -23,6 +23,24 @@ namespace ClientApplicationMVC.Controllers
             ViewBag.Message = "Please enter your username and password.";
             return View("Index");
         }
+
+        public ActionResult LogIn()
+        {
+            ViewBag.LoginResponse = "TEST";
+            return View("Index"); //Change to display new page
+        }
+
+        public ActionResult CreateAccount()
+        {
+            return View("CreateAccount");
+        }
+
+        public ActionResult CreationConfirmationPage()
+        {
+
+            ViewBag.Confirmation = "Account Created";
+            return View("CreationConfirmationPage");
+        }
 		
 		//This class is incomplete and should be completed by the students in milestone 2
 		//Hint: You will need to make use of the ServiceBusConnection class. See EchoController.cs for an example.
