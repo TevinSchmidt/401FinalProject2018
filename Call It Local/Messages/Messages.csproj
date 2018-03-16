@@ -30,7 +30,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="MySql.Data, Version=6.10.5.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL" />
+    <Reference Include="MySql.Data, Version=6.10.6.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL" />
     <Reference Include="NServiceBus.Core, Version=6.0.0.0, Culture=neutral, PublicKeyToken=9fc386479f8a226c, processorArchitecture=MSIL">
       <HintPath>..\packages\NServiceBus.6.4.3\lib\net452\NServiceBus.Core.dll</HintPath>
     </Reference>
@@ -59,6 +59,11 @@
     <Compile Include="ServiceBusRequest\Authentication\AuthenticationServiceRequest.cs" />
     <Compile Include="ServiceBusRequest\Authentication\Requests\CreateAccountRequest.cs" />
     <Compile Include="ServiceBusRequest\Authentication\Requests\LogInRequest.cs" />
+    <Compile Include="ServiceBusRequest\CompanyDirectory\CompanyDirectoryServiceRequest.cs" />
+    <Compile Include="ServiceBusRequest\CompanyDirectory\Requests\CompanySearchRequest.cs" />
+    <Compile Include="ServiceBusRequest\CompanyDirectory\Requests\GetCompanyInfoRequest.cs" />
+    <Compile Include="ServiceBusRequest\CompanyDirectory\Responses\CompanySearchResponse.cs" />
+    <Compile Include="ServiceBusRequest\CompanyDirectory\Responses\GetCompanyInfoResponse.cs" />
     <Compile Include="ServiceBusRequest\Echo\EchoServiceRequest.cs" />
     <Compile Include="ServiceBusRequest\Echo\Requests\AsIsEchoRequest.cs" />
     <Compile Include="ServiceBusRequest\Echo\Requests\ReverseEchoRequest.cs" />
