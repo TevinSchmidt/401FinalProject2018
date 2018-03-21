@@ -1,6 +1,6 @@
 ﻿using Messages.DataTypes.Database.CompanyDirectory;
-
 using System;
+using Messages.ServiceBusRequest.CompanyDirectory.Requests;
 
 namespace Messages.ServiceBusRequest.CompanyDirectory.Responses
 {
@@ -12,6 +12,8 @@ namespace Messages.ServiceBusRequest.CompanyDirectory.Responses
         {
             this.companyInfo = companyInfo;
         }
+
+
 
         /// <summary>
         /// Contains information about the company the client requested

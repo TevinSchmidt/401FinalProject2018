@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AuthenticationService", "Au
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClientApplicationMVC", "ClientApplicationMVC\ClientApplicationMVC.csproj", "{A057BE35-FA23-4877-9FF1-FF2CEB8E0170}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DirectoryService", "DirectoryService\DirectoryService.csproj", "{C4A09FBC-B983-425F-9494-8959330F4E29}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{A057BE35-FA23-4877-9FF1-FF2CEB8E0170}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A057BE35-FA23-4877-9FF1-FF2CEB8E0170}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A057BE35-FA23-4877-9FF1-FF2CEB8E0170}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C4A09FBC-B983-425F-9494-8959330F4E29}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C4A09FBC-B983-425F-9494-8959330F4E29}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C4A09FBC-B983-425F-9494-8959330F4E29}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C4A09FBC-B983-425F-9494-8959330F4E29}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

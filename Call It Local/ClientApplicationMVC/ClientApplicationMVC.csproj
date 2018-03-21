@@ -208,8 +208,8 @@
     <Content Include="Views\Web.config" />
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Authentication\CreationConfirmationPage.cshtml" />
-    <Content Include="Views\CompanyDirectory\DisplayCompany.cshtml" />
-    <Content Include="Views\CompanyDirectory\Index.cshtml" />
+    <Content Include="Views\CompanyListings\DisplayCompany.cshtml" />
+    <Content Include="Views\CompanyListings\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

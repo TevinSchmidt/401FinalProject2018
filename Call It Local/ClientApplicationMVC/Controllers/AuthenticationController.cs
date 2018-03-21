@@ -61,34 +61,36 @@ namespace ClientApplicationMVC.Controllers
         public ActionResult CreationConfirmationPage(string username, string email, string password,
             string address, string phonenumber, AccountType users)
         {
-            CreateAccount account = new CreateAccount();
-            account.username = username;
-            account.password = password;
-            account.address = address;
-            account.phonenumber = phonenumber;
-            account.email = email;
-            account.type = users;
-            CreateAccountRequest request = new CreateAccountRequest(account);
-            ServiceBusResponse response;
-            ServiceBusConnection connection = ConnectionManager.getConnectionObject(Globals.getUser());
-            if(connection == null)
-            {
-                response = ConnectionManager.sendNewAccountInfo(request);
-            } else
-            {
-                response = connection.sendNewAccountInfo(request);
-            }
-            if (response.result)
-            {
-                return View("Index");
-            } else
-            {
-                ViewBag.CreationMessage = response.response;
-                return View("CreateAccount");
-            }
-            
 
-            
+                CreateAccount account = new CreateAccount();
+                account.username = username;
+                account.password = password;
+                account.address = address;
+                account.phonenumber = phonenumber;
+                account.email = email;
+                account.type = users;
+
+                CreateAccountRequest request = new CreateAccountRequest(account);
+                ServiceBusResponse response;
+                ServiceBusConnection connection = ConnectionManager.getConnectionObject(Globals.getUser());
+                if (connection == null)
+                {
+                    response = ConnectionManager.sendNewAccountInfo(request);
+                }
+                else
+                {
+                    response = connection.sendNewAccountInfo(request);
+                }
+                if (response.result)
+                {
+                    return View("Index");
+                }
+                else
+                {
+                    ViewBag.CreationMessage = response.response;
+                    return View("CreateAccount");
+                }
+
         }
 		
 		//This class is incomplete and should be completed by the students in milestone 2
