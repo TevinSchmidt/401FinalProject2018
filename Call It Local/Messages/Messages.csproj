@@ -48,6 +48,8 @@
     <Compile Include="Database\AbstractDatabase.cs" />
     <Compile Include="Database\Column.cs" />
     <Compile Include="Database\Table.cs" />
+    <Compile Include="DataTypes\Database\CompanyDirectory\CompanyInstance.cs" />
+    <Compile Include="DataTypes\Database\CompanyDirectory\CompanyList.cs" />
     <Compile Include="DataTypes\Enums.cs" />
     <Compile Include="DataTypes\SharedData.cs" />
     <Compile Include="Debug\Debug.cs" />
