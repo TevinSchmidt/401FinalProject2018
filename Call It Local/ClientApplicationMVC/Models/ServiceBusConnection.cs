@@ -12,6 +12,9 @@ using System.Runtime.Serialization.Formatters.Binary;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading;
+using Messages.ServiceBusRequest.CompanyDirectory.Responses;
+using Messages.ServiceBusRequest.CompanyDirectory.Requests;
+using Messages.DataTypes.Database.CompanyDirectory;
 
 namespace ClientApplicationMVC.Models
 {
@@ -20,6 +23,19 @@ namespace ClientApplicationMVC.Models
     /// </summary>
     public partial class ServiceBusConnection
     {
+        public CompanySearchResponse searchCompanyByName(CompanySearchRequest request)
+        {
+            //TODO delete this and implement
+            return new CompanySearchResponse(false, "hello", new Messages.DataTypes.Database.CompanyDirectory.CompanyList());
+        }
+
+        public GetCompanyInfoResponse getCompanyInfo(GetCompanyInfoRequest request)
+        {
+            //TODO delete this and implement
+
+            return new GetCompanyInfoResponse(false, "hello", new CompanyInstance("James"));
+        }
+
         public ServiceBusConnection(string username)
         {
             this.username = username;
