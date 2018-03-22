@@ -101,6 +101,7 @@ namespace DirectoryService.Database
                     MySqlCommand command = new MySqlCommand(query, connection);
                     MySqlDataReader dataReader = command.ExecuteReader();
                     int count = 0;
+                    list.companyNames = new string[1];
                     while(dataReader.Read()) {
                         list.companyNames[count] = dataReader.GetString("companyname");
                     }
