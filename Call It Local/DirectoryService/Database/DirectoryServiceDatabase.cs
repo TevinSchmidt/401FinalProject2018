@@ -100,12 +100,13 @@ namespace DirectoryService.Database
                 {
                     MySqlCommand command = new MySqlCommand(query, connection);
                     MySqlDataReader dataReader = command.ExecuteReader();
-                    int count = 0;
-                    list.companyNames = new string[1];
+
+                    List<string> temp = new List<string>();
                     while(dataReader.Read()) {
-                        list.companyNames[count] = dataReader.GetString("companyname");
+                        temp.Add(dataReader.GetString("companyname"));
                     }
                     dataReader.Close();
+                    list.companyNames = temp.ToArray();
                     result = true;
                 }
                 catch (MySqlException e)
