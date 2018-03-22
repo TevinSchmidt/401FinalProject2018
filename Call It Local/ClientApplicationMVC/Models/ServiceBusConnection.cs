@@ -23,10 +23,23 @@ namespace ClientApplicationMVC.Models
     /// </summary>
     public partial class ServiceBusConnection
     {
+
+     
+
+        public ServiceBusConnection(string username)
+        {
+            this.username = username;
+        }
+
+        #region ServiceBusMessages
+
+        #region CompanyDirectoryServiceMessages
+
         public CompanySearchResponse searchCompanyByName(CompanySearchRequest request)
         {
             //TODO delete this and implement
-            return new CompanySearchResponse(false, "hello", new Messages.DataTypes.Database.CompanyDirectory.CompanyList());
+            send(request);
+            return (CompanySearchResponse)readUntilEOF();
         }
 
         public GetCompanyInfoResponse getCompanyInfo(GetCompanyInfoRequest request)
@@ -35,13 +48,7 @@ namespace ClientApplicationMVC.Models
 
             return new GetCompanyInfoResponse(false, "hello", new CompanyInstance("James"));
         }
-
-        public ServiceBusConnection(string username)
-        {
-            this.username = username;
-        }
-
-        #region ServiceBusMessages
+        #endregion CompanyDirectoryServiceMessages
 
         #region AuthenticationServiceMessages
 
