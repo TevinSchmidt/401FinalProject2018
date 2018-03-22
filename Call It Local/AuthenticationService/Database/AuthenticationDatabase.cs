@@ -95,6 +95,7 @@ namespace AuthenticationService.Database
             
             bool result = false;
             string message = "";
+            
 
             if (openConnection() == true)
             {
