@@ -72,11 +72,11 @@ namespace DirectoryService
                 switch (entry)
                 {
                     case ("DELETEDB"):
-                        EchoServiceDatabase.getInstance().deleteDatabase();
+                        DirectoryServiceDatabase.getInstance().deleteDatabase();
                         Debug.consoleMsg("Delete database attempt complete");
                         break;
                     case ("CREATEDB"):
-                        EchoServiceDatabase.getInstance().createDB();
+                        DirectoryServiceDatabase.getInstance().createDB();
                         Debug.consoleMsg("Completed Database Creation Attempt.");
                         break;
                     default:
@@ -90,4 +90,4 @@ namespace DirectoryService
         }
     }
 }
-}
+
