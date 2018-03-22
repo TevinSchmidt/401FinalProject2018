@@ -47,6 +47,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Database\DirectoryServiceDatabase.cs" />
+    <Compile Include="Handlers\AccountCreatedHandler.cs" />
     <Compile Include="Handlers\CompanySearchHandler.cs" />
     <Compile Include="Handlers\GetCompanyInfoHandler.cs" />
     <Compile Include="Program.cs" />

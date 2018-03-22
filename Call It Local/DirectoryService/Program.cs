@@ -29,10 +29,10 @@ namespace DirectoryService
         /// <returns>Nothing.</returns>
         static async Task AsyncMain()
         {
-            Console.Title = "Directory";
+            Console.Title = "CompanyDirectory";
 
             //Create a new Endpoint configuration with the name "Echo"
-            EndpointConfiguration endpointConfiguration = new EndpointConfiguration("Echo");
+            EndpointConfiguration endpointConfiguration = new EndpointConfiguration("CompanyDirectory");
 
             //These two lines prevemt the endpoint configuration from scanning the MySql dll. 
             //This is done because it speeds up the startup time, and it prevents a rare but 
@@ -57,7 +57,7 @@ namespace DirectoryService
             var routing = transport.Routing();
 
             //Register to the AsIsEcho event published by the Authentication endpoint
-            routing.RegisterPublisher(typeof(AsIsEchoEvent), "Authentication");
+            routing.RegisterPublisher(typeof(AccountCreated), "Authentication");
 
             //Start the endpoint with the configuration defined above. It should be noted that any changes made to the endpointConfiguration after an endpoint is instantiated will not apply to any endpoints that have already been instantiated
             var endpointInstance = await Endpoint.Start(endpointConfiguration).ConfigureAwait(false);

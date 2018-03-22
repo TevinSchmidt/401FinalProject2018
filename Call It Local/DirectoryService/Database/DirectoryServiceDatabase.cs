@@ -50,7 +50,7 @@ namespace DirectoryService.Database
 
             if (openConnection() == true)
             {
-                string query = @"INSERT INTO companies(timestamp, username, datain)" +
+                string query = @"INSERT INTO companies(companyname, phonenumber, email, location)" +
                     @"VALUES('" + company.companyName + @"', '" + company.phoneNumber + @"', '" +
                     company.email + @"', '" + company.locations[0] + @"');";
                 try
@@ -68,7 +68,7 @@ namespace DirectoryService.Database
                 }
                 catch (Exception e)
                 {
-                    Messages.Debug.consoleMsg("Unable to Unable to complete insert new user into database." +
+                    Messages.Debug.consoleMsg("Unable to complete insert new user into database." +
                         " Error:" + e.Message);
                     message = e.Message;
                 }
@@ -93,7 +93,7 @@ namespace DirectoryService.Database
 
             string query = @"SELECT * FROM " + databaseName + @".companies WHERE companyname='" + 
                 company.searchDeliminator + @"';";
-
+            
             if (openConnection() == true)
             {
                 try

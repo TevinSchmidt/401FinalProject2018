@@ -39,7 +39,8 @@ namespace ClientApplicationMVC.Models
         {
             //TODO delete this and implement
             send(request);
-            return (CompanySearchResponse)readUntilEOF();
+            ServiceBusResponse resp = readUntilEOF();
+            return (CompanySearchResponse)resp;
         }
 
         public GetCompanyInfoResponse getCompanyInfo(GetCompanyInfoRequest request)
