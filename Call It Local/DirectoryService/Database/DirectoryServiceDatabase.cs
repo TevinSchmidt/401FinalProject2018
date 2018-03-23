@@ -91,8 +91,8 @@ namespace DirectoryService.Database
             string message = "";
             CompanyList list = new CompanyList();
 
-            string query = @"SELECT * FROM " + databaseName + @".companies WHERE companyname='" + 
-                company.searchDeliminator + @"';";
+            string query = @"SELECT * FROM " + databaseName + @".companies WHERE companyname LIKE '%" + 
+                company.searchDeliminator + @"%';";
             
             if (openConnection() == true)
             {
