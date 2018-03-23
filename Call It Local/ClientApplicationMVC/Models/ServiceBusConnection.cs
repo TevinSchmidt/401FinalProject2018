@@ -46,8 +46,9 @@ namespace ClientApplicationMVC.Models
         public GetCompanyInfoResponse getCompanyInfo(GetCompanyInfoRequest request)
         {
             //TODO delete this and implement
-
-            return new GetCompanyInfoResponse(false, "hello", new CompanyInstance("James"));
+            send(request);
+            ServiceBusResponse resp = readUntilEOF();
+            return (GetCompanyInfoResponse)resp;
         }
         #endregion CompanyDirectoryServiceMessages
 
