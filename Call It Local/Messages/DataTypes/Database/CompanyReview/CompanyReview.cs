@@ -8,9 +8,9 @@ using NServiceBus;
 namespace Messages.DataTypes.Database.CompanyReview
 {
     [Serializable]
-    public partial class CompanyReview
+    public partial class Review
     {
-        public CompanyReview(string companyName, string review, string stars, string timestamp, string username)
+        public Review(string companyName, string review, string stars, string timestamp, string username)
         {
             this.companyName = companyName;
             this.review = review;
@@ -20,7 +20,7 @@ namespace Messages.DataTypes.Database.CompanyReview
         }
     }
 
-    public partial class CompanyReview
+    public partial class Review
     {
         /// <summary>
         /// The name of the company

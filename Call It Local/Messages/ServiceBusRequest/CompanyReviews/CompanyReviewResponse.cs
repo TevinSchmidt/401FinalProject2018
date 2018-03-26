@@ -8,7 +8,7 @@ namespace Messages.ServiceBusRequest.CompanyReviews
     [Serializable]
     public class CompanyReviewResponse : ServiceBusResponse
     {
-        public CompanyReviewResponse(bool result, string response, List<CompanyReview> reviews)
+        public CompanyReviewResponse(bool result, string response, List<Review> reviews)
             : base(result, response)
         {
             this.reviews = reviews;
@@ -17,6 +17,6 @@ namespace Messages.ServiceBusRequest.CompanyReviews
         /// <summary>
         /// Indicates the type of request the client is seeking from the Company Directory Service
         /// </summary>
-        public List<CompanyReview> reviews;
+        public List<Review> reviews;
     }
 }
