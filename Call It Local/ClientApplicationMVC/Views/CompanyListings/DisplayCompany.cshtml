@@ -11,7 +11,8 @@
 <br />
 <p>@ViewBag.CompanyName can be found at these locations:</p>
 <br />
-@foreach (string location in ViewBag.CompanyInfo.locations)
+
+@foreach(string location in ViewBag.CompanyInfo.locations)
 {
     <p style="padding-left:4em;">@location</p>
     <br />

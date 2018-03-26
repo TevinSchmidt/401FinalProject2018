@@ -149,9 +149,23 @@ namespace DirectoryService.Database
                 {
                     MySqlCommand command = new MySqlCommand(query, connection);
                     MySqlDataReader dataReader = command.ExecuteReader();
-                    company = new CompanyInstance(dataReader.GetString("companyname"),
-                        dataReader.GetString("phonenumber"), dataReader.GetString("email"),
-                        new string[] { dataReader.GetString("location") });
+
+
+                    if (dataReader.Read())
+                    {
+
+                        string companyname = dataReader.GetString("companyname");
+                        string phonenumber = dataReader.GetString("phonenumber");
+                        string email = dataReader.GetString("email");
+                        string location = dataReader.GetString("location");
+
+                        company = new CompanyInstance(companyname, phonenumber, email, new string[] { location });
+                    }
+                    else
+                    {
+                        throw new Exception("Reader cannot read. DirectoryServiceDatabase Error.");
+                    }
+
                     dataReader.Close();
                     result = true;
                 }
