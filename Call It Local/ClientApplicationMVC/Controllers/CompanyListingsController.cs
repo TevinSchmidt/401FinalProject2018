@@ -62,6 +62,25 @@ namespace ClientApplicationMVC.Controllers
             return View("Index");
         }
 
+        public ActionResult Review(string companyReview, string companyStars)
+        {
+            if (Globals.isLoggedIn() == false)
+            {
+                return RedirectToAction("Index", "Authentication");
+            }
+
+            ServiceBusConnection connection = ConnectionManager.getConnectionObject(Globals.getUser());
+            if (connection == null)
+            {
+                return RedirectToAction("Index", "Authentication");
+            }
+
+            CompanyReviewRequest request = new CompanyReviewRequest(companyReview, companyStars);
+
+
+            return RedirectToAction("DisplayCompany");
+        }
+
         /// <summary>
         /// This function is called when the client navigates to *hostname*/CompanyListings/DisplayCompany/*info*
         /// </summary>
@@ -89,6 +108,11 @@ namespace ClientApplicationMVC.Controllers
             GetCompanyInfoRequest infoRequest = new GetCompanyInfoRequest(new CompanyInstance(id));
             GetCompanyInfoResponse infoResponse = connection.getCompanyInfo(infoRequest);
             ViewBag.CompanyInfo = infoResponse.companyInfo;
+
+            GetReviewRequest reviewRequest = new GetReviewRequest();
+            GetReviewResponse = reviewResponse = connection.getReview(reviewRequest);
+
+            ViewBag.Reviewlist = reviewResponse.reviewList;
 
             return View("DisplayCompany");
         }
