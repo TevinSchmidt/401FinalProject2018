@@ -9,10 +9,9 @@ using Messages.DataTypes.Database.CompanyReview;
 namespace Messages.NServiceBus.Events
 {
     [Serializable]
-    public class ReviewEvent : IEvent
+    public class AddReviewEvent : IEvent
     {
         public Review review { get; set; }
-        public string companyname { get; set; }
-        public bool isNewReview { get; set; }
+       
     }
 }

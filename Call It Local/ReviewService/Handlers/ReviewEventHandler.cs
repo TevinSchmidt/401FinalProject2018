@@ -17,7 +17,7 @@ namespace EchoService.Handlers
     /// This is the handler class for the reverse echo. 
     /// This class is created and its methods called by the NServiceBus framework
     /// </summary>
-    public class ReviewEventHandler : IHandleMessages<ReviewEvent>
+    public class ReviewEventHandler : IHandleMessages<AddReviewEvent>
     {
         
         /// <summary>
@@ -26,7 +26,7 @@ namespace EchoService.Handlers
         /// </summary>
         /// It is important that all logger member variables be static, because NServiceBus tutorials warn that GetLogger<>()
         /// is an expensive call, and there is no need to instantiate a new logger every time a handler is created.
-        static ILog log = LogManager.GetLogger<ReviewEvent>();
+        static ILog log = LogManager.GetLogger<AddReviewEvent>();
 
         /// <summary>
         /// Saves the echo to the database
@@ -35,7 +35,7 @@ namespace EchoService.Handlers
         /// <param name="message">Information about the echo</param>
         /// <param name="context"></param>
         /// <returns>Nothing</returns>
-        public Task Handle(ReviewEvent message, IMessageHandlerContext context)
+        public Task Handle(AddReviewEvent message, IMessageHandlerContext context)
         {
             //TODO: fix the next line
             string url = "NEED TO PUT THE URL HERE";

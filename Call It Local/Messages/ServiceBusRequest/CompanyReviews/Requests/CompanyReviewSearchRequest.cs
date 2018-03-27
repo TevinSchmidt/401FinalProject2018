@@ -7,10 +7,10 @@ using System.Threading.Tasks;
 namespace Messages.ServiceBusRequest.CompanyReviews
 {
     [Serializable]
-    public class CompanySearchRequest : ServiceBusRequest
+    public class CompanyReviewSearchRequest : CompanyReviewServiceRequest
     {
-        public CompanySearchRequest(string companyName)
-            : base(Service.CompanyReviews)
+        public CompanyReviewSearchRequest(string companyName)
+            : base(CompanyReviewRequest.SearchReviews)
         {
             this.companyName = companyName;
         }

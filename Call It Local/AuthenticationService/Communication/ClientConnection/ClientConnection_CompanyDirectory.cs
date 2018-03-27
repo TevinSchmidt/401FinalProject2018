@@ -36,7 +36,7 @@ namespace AuthenticationService.Communication
         }
 
         /// <summary>
-        /// Publishes an EchoEvent.
+        /// 
         /// </summary>
         /// <param name="request">The data to be echo'd back to the client</param>
         /// <returns>The data sent by the client</returns>

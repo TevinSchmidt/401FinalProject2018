@@ -4,6 +4,7 @@ using Messages.ServiceBusRequest;
 using Messages.ServiceBusRequest.Authentication;
 using Messages.ServiceBusRequest.Echo;
 using Messages.ServiceBusRequest.CompanyDirectory;
+using Messages.ServiceBusRequest.CompanyReviews;
 
 using NServiceBus;
 
@@ -86,6 +87,8 @@ namespace AuthenticationService.Communication
                     return echoRequest((EchoServiceRequest)request);
                 case (Service.CompanyDirectory):
                     return directoryRequest((CompanyDirectoryServiceRequest)request);
+                case (Service.CompanyReviews):
+                    return reviewRequest((CompanyReviewServiceRequest)request);
                 default:
                     return new ServiceBusResponse(false, "Error: Invalid request. Did not specify a valid service type. Specified type was: " + request.serviceRequested.ToString());
             }

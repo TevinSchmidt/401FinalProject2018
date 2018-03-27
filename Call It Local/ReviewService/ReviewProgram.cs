@@ -1,5 +1,4 @@
-﻿using EchoService.Database;
-
+﻿
 using Messages;
 using Messages.NServiceBus.Events;
 
@@ -60,7 +59,7 @@ namespace EchoService
             var routing = transport.Routing();
 
             //Register to the AsIsEcho event published by the Authentication endpoint
-            routing.RegisterPublisher(typeof(ReviewEvent), "Authentication");
+            routing.RegisterPublisher(typeof(AddReviewEvent), "Authentication");
             //Start the endpoint with the configuration defined above. It should be noted that any changes made to the endpointConfiguration after an endpoint is instantiated will not apply to any endpoints that have already been instantiated
             var endpointInstance = await Endpoint.Start(endpointConfiguration).ConfigureAwait(false);
             
