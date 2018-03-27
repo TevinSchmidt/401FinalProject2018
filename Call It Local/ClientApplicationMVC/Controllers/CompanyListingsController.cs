@@ -9,6 +9,9 @@ using Messages.ServiceBusRequest.CompanyDirectory.Requests;
 using System;
 using System.Web.Mvc;
 using System.Web.Routing;
+using Messages.ServiceBusRequest.CompanyReviews;
+using Messages.ServiceBusRequest.CompanyReviews.Requests;
+using Messages.DataTypes.Database.CompanyReview;
 
 namespace ClientApplicationMVC.Controllers
 {
@@ -74,9 +77,11 @@ namespace ClientApplicationMVC.Controllers
             {
                 return RedirectToAction("Index", "Authentication");
             }
-
-            CompanyReviewRequest request = new CompanyReviewRequest(companyReview, companyStars);
-
+            DateTime now = DateTime.Now;
+            AddCompanyReviewRequest request = new AddCompanyReviewRequest(new Review(ViewBag.CompanyName, companyReview, companyStars, now.ToString(), Globals.getUser()));
+            ServiceBusResponse response = connection.addCompanyReview(request);
+            
+            //Can check if result is true here or just redirect to displaycompany and reload page
 
             return RedirectToAction("DisplayCompany");
         }
@@ -109,12 +114,11 @@ namespace ClientApplicationMVC.Controllers
             GetCompanyInfoResponse infoResponse = connection.getCompanyInfo(infoRequest);
             ViewBag.CompanyInfo = infoResponse.companyInfo;
 
-            GetReviewRequest reviewRequest = new GetReviewRequest();
-            GetReviewResponse = reviewResponse = connection.getReview(reviewRequest);
+            CompanyReviewSearchRequest reviewRequest = new CompanyReviewSearchRequest(id);
+            CompanyReviewResponse reviewResponse = connection.searchCompanyReview(reviewRequest);
 
-            ViewBag.Reviewlist = reviewResponse.reviewList;
-
+            ViewBag.Reviewlist = reviewResponse.reviews;
             return View("DisplayCompany");
         }
     }
-}
+}  

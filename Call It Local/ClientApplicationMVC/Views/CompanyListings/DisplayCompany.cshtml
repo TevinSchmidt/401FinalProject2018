@@ -33,21 +33,21 @@
     <h4>@ViewBag.CompanyName Reviews:</h4>
     @if (ViewBag.Reviewlist != null)
     {
-        if (ViewBag.Reviewlist.companyNames.Length == 0)
+        if (ViewBag.Reviewlist.reviews.Count == 0)
         {
             <p>This company does not have any reviews. Be the first!</p>
         }
         else
         {
             <p style="font-size:larger">Results:</p> <br />
-            foreach (string item in ViewBag.Reviewlist.reviewsList)
+            foreach (string item in ViewBag.Reviewlist.reviews)
             {
                 //@Html.ActionLink(item, "DisplayCompany/" + item, "CompanyListings")
                 //TODO add this stuff when list structure is known
-                <p>Username:</p>
-                <p>Stars:</p>
-                <p>Review:</p>
-                <p>Timestamp:</p>
+                <p>Username: item.username</p>
+                <p>Stars: stars</p>
+                <p>Review: review</p>
+                <p>Timestamp: timestamp</p>
                 <br />
             }
         }

@@ -15,6 +15,8 @@ using System.Threading;
 using Messages.ServiceBusRequest.CompanyDirectory.Responses;
 using Messages.ServiceBusRequest.CompanyDirectory.Requests;
 using Messages.DataTypes.Database.CompanyDirectory;
+using Messages.ServiceBusRequest.CompanyReviews;
+using Messages.ServiceBusRequest.CompanyReviews.Requests;
 
 namespace ClientApplicationMVC.Models
 {
@@ -51,6 +53,25 @@ namespace ClientApplicationMVC.Models
             return (GetCompanyInfoResponse)resp;
         }
         #endregion CompanyDirectoryServiceMessages
+
+        #region CompanyReviewServiceMessages
+
+        public CompanyReviewResponse searchCompanyReview(CompanyReviewSearchRequest request)
+        {
+            send(request);
+            ServiceBusResponse resp = readUntilEOF();
+            return (CompanyReviewResponse)resp;
+        }
+
+        public ServiceBusResponse addCompanyReview(AddCompanyReviewRequest request)
+        {
+            send(request);
+            ServiceBusResponse resp = readUntilEOF();
+            return resp;
+        }
+
+        #endregion
+
 
         #region AuthenticationServiceMessages
 
