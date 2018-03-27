@@ -18,9 +18,6 @@
     <br />
 }
 
-<div>
-    <h4>@ViewBag.CompanyName Reviews:</h4>
-</div>
 
 <div style="height:100px">
     <h4>Start a conversation with @ViewBag.CompanyName</h4>
@@ -30,5 +27,44 @@
     <div style="float:left">
         <button class="sendbutton" id="SendMessageButton">Send</button>
     </div>
+</div>
+
+<div>
+    <h4>@ViewBag.CompanyName Reviews:</h4>
+    @if (ViewBag.Reviewlist != null)
+    {
+        if (ViewBag.Reviewlist.companyNames.Length == 0)
+        {
+            <p>This company does not have any reviews. Be the first!</p>
+        }
+        else
+        {
+            <p style="font-size:larger">Results:</p> <br />
+            foreach (string item in ViewBag.Reviewlist.reviewsList)
+            {
+                //@Html.ActionLink(item, "DisplayCompany/" + item, "CompanyListings")
+                //TODO add this stuff when list structure is known
+                <p>Username:</p>
+                <p>Stars:</p>
+                <p>Review:</p>
+                <p>Timestamp:</p>
+                <br />
+            }
+        }
+    }
+</div>
+<div>
+    <h4>Leave a review for @ViewBag.CompanyName</h4>
+    @using (Html.BeginForm("FrontPage", "Home"))
+    {
+        <div class="form-group">
+            @Html.TextBox("companyReview")
+        </div>
+        <div class="form-group">
+            <label></label>
+            @Html.TextBox("companyStars")
+        </div>
+        <input type="submit" value="Review" />
+    }
 </div>
 <br /><br />
