@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.27130.2027
+VisualStudioVersion = 15.0.26730.12
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Messages", "Messages\Messages.csproj", "{7262FA14-C402-4162-B12C-548FBED6409C}"
 EndProject
@@ -12,6 +12,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClientApplicationMVC", "ClientApplicationMVC\ClientApplicationMVC.csproj", "{A057BE35-FA23-4877-9FF1-FF2CEB8E0170}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DirectoryService", "DirectoryService\DirectoryService.csproj", "{C4A09FBC-B983-425F-9494-8959330F4E29}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReviewService", "ReviewService\ReviewService.csproj", "{1D3805FC-0EB4-47B2-AC96-B8FBF0D64223}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +41,10 @@ Global
 		{C4A09FBC-B983-425F-9494-8959330F4E29}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C4A09FBC-B983-425F-9494-8959330F4E29}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C4A09FBC-B983-425F-9494-8959330F4E29}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1D3805FC-0EB4-47B2-AC96-B8FBF0D64223}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1D3805FC-0EB4-47B2-AC96-B8FBF0D64223}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1D3805FC-0EB4-47B2-AC96-B8FBF0D64223}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1D3805FC-0EB4-47B2-AC96-B8FBF0D64223}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
