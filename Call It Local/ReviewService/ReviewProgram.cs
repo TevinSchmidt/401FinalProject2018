@@ -3,7 +3,8 @@ using Messages;
 using Messages.NServiceBus.Events;
 
 using NServiceBus;
-
+using Messages.ServiceBusRequest.CompanyReviews;
+using Messages.ServiceBusRequest.CompanyReviews.Requests;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -59,7 +60,8 @@ namespace EchoService
             var routing = transport.Routing();
 
             //Register to the AsIsEcho event published by the Authentication endpoint
-            routing.RegisterPublisher(typeof(AddReviewEvent), "Authentication");
+            routing.RegisterPublisher(typeof(AddCompanyReviewRequest), "Authentication");
+            routing.RegisterPublisher(typeof(CompanyReviewSearchRequest), "Authentication");
             //Start the endpoint with the configuration defined above. It should be noted that any changes made to the endpointConfiguration after an endpoint is instantiated will not apply to any endpoints that have already been instantiated
             var endpointInstance = await Endpoint.Start(endpointConfiguration).ConfigureAwait(false);
             
