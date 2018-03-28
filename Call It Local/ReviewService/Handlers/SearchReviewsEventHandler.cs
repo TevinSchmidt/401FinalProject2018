@@ -18,7 +18,7 @@ using Messages.DataTypes.Database.CompanyReview;
 using System.Collections.Generic;
 namespace EchoService.Handlers
 {
-    class AddReviewEventHandler : IHandleMessages<CompanyReviewSearchRequest>
+    class SearchReviewsEventHandler : IHandleMessages<CompanyReviewSearchRequest>
     {
 
         static ILog log = LogManager.GetLogger<CompanyReviewSearchRequest>();
@@ -30,7 +30,7 @@ namespace EchoService.Handlers
             HttpClient httpClient = new HttpClient();
             try
             {
-                string company = "{ " + message.companyName + " }";
+                string company = "{\"companyName\":\"" + message.companyName + "\"}";
                 httpClient.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
                 System.Threading.Tasks.Task<HttpResponseMessage> wcfresponse = httpClient.PostAsync(url, new StringContent(company, Encoding.UTF8, "application/json"));
                 List<Review> reviews = JsonConvert.DeserializeObject<List<Review>>(wcfresponse.ToString());
