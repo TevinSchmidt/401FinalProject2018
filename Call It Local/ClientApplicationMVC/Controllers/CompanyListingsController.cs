@@ -20,6 +20,7 @@ namespace ClientApplicationMVC.Controllers
     /// </summary>
     public class CompanyListingsController : Controller
     {
+        private static string companyNameeeee;
         /// <summary>
         /// This function is called when the client navigates to *hostname*/CompanyListings
         /// </summary>
@@ -78,12 +79,12 @@ namespace ClientApplicationMVC.Controllers
                 return RedirectToAction("Index", "Authentication");
             }
             DateTime now = DateTime.Now;
-            AddCompanyReviewRequest request = new AddCompanyReviewRequest(new Review(ViewBag.CompanyName, companyReview, companyStars, now.ToString(), Globals.getUser()));
+            AddCompanyReviewRequest request = new AddCompanyReviewRequest(new Review(companyNameeeee, companyReview, companyStars, now.ToString(), Globals.getUser()));
             ServiceBusResponse response = connection.addCompanyReview(request);
             
             //Can check if result is true here or just redirect to displaycompany and reload page
-
-            return RedirectToAction("DisplayCompany");
+            
+            return RedirectToAction("Index");
         }
 
         /// <summary>
@@ -109,6 +110,7 @@ namespace ClientApplicationMVC.Controllers
             }
 
             ViewBag.CompanyName = id;
+            companyNameeeee = id;
 
             GetCompanyInfoRequest infoRequest = new GetCompanyInfoRequest(new CompanyInstance(id));
             GetCompanyInfoResponse infoResponse = connection.getCompanyInfo(infoRequest);
