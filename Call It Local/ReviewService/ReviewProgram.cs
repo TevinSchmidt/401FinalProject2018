@@ -60,36 +60,23 @@ namespace EchoService
             var routing = transport.Routing();
 
             //Register to the AsIsEcho event published by the Authentication endpoint
-            routing.RegisterPublisher(typeof(AddCompanyReviewRequest), "Authentication");
-            routing.RegisterPublisher(typeof(CompanyReviewSearchRequest), "Authentication");
+            routing.RegisterPublisher(typeof(AddReviewEvent), "Authentication");
+            
             //Start the endpoint with the configuration defined above. It should be noted that any changes made to the endpointConfiguration after an endpoint is instantiated will not apply to any endpoints that have already been instantiated
             var endpointInstance = await Endpoint.Start(endpointConfiguration).ConfigureAwait(false);
             
             Debug.consoleMsg("Press Enter to exit.");
             string entry;
-            /*
+            
             do
             {
                 entry = Console.ReadLine();
 
-                switch (entry)
-                {
-                    case ("DELETEDB"):
-                        EchoServiceDatabase.getInstance().deleteDatabase();
-                        Debug.consoleMsg("Delete database attempt complete");
-                        break;
-                    case ("CREATEDB"):
-                        EchoServiceDatabase.getInstance().createDB();
-                        Debug.consoleMsg("Completed Database Creation Attempt.");
-                        break;
-                    default:
-                        Debug.consoleMsg("Command not understood");
-                        break;
-                }
+    
             } while (!entry.Equals(""));
 
             await endpointInstance.Stop().ConfigureAwait(false);
-            */
+            
         }
     }
 }

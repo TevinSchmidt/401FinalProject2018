@@ -39,19 +39,20 @@ namespace EchoService.Handlers
         public Task Handle(AddReviewEvent message, IMessageHandlerContext context)
         {
             //TODO: fix the next line
-            string url = "NEED TO PUT THE URL HERE";
+            string url = "http://35.188.63.193/Home/SaveCompanyReview/";
             HttpClient httpClient = new HttpClient();
-                try
-                {
-                    string json = JsonConvert.SerializeObject(message.review);
-                    httpClient.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
-                    System.Threading.Tasks.Task<HttpResponseMessage> wcfresponse = httpClient.PostAsync(url, new StringContent(json, Encoding.UTF8, "application/json"));
-                    return Task.CompletedTask;
-                }
+            try
+            {
+                string json = JsonConvert.SerializeObject(message.review);
+                json = "{\"review\":" + json + "}"; 
+                httpClient.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
+                HttpResponseMessage wcfresponse = httpClient.PostAsync(url, new StringContent(json, Encoding.UTF8, "application/json")).GetAwaiter().GetResult();
+                return Task.CompletedTask;
+            }
             catch(HttpRequestException e)
-                {
-                    //TODO: Error Message
-                }
+            {
+                //TODO: Error Message
+            }
             return context.Reply(new ServiceBusResponse(false, "FAILED to add review"));
         }
     }
