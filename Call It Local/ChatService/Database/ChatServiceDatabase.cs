@@ -1,4 +1,8 @@
-﻿using System;
+﻿using Messages.Database;
+using Messages.ServiceBusRequest;
+using Messages.ServiceBusRequest.CompanyDirectory.Responses;
+using MySql.Data.MySqlClient;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,17 +15,17 @@ namespace ChatService.Database
         /// <summary>
         /// Private default constructor to enforce the use of the singleton design pattern
         /// </summary>
-        private DirectoryServiceDatabase() { }
+        private ChatServiceDatabase() { }
 
         /// <summary>
         /// Gets the singleton instance of the database
         /// </summary>
         /// <returns>The singleton instance of the database</returns>
-        public static DirectoryServiceDatabase getInstance()
+        public static ChatServiceDatabase getInstance()
         {
             if (instance == null)
             {
-                instance = new DirectoryServiceDatabase();
+                instance = new ChatServiceDatabase();
             }
             return instance;
         }
@@ -186,20 +190,20 @@ namespace ChatService.Database
     /// <summary>
     /// This portion of the class contains the properties and variables 
     /// </summary>
-    public partial class DirectoryServiceDatabase : AbstractDatabase
+    public partial class ChatServiceDatabase : AbstractDatabase
     {
         /// <summary>
         /// The name of the database.
         /// Both of these properties are required in order for both the base class and the
         /// table definitions below to have access to the variable.
         /// </summary>
-        private const String dbname = "directory";
+        private const String dbname = "chat";
         public override string databaseName { get; } = dbname;
 
         /// <summary>
         /// The singleton isntance of the database
         /// </summary>
-        protected static DirectoryServiceDatabase instance = null;
+        protected static ChatServiceDatabase instance = null;
 
         /// <summary>
         /// This property represents the database schema, and will be used by the base class
@@ -213,11 +217,10 @@ namespace ChatService.Database
                 "companies",
                 new Column[]
                 {
-                    new Column("id", "INT(64)", new string[] {"NOT NULL", "UNIQUE", "AUTO_INCREMENT"}, true),
-                    new Column("companyname", "VARCHAR(100)", new string[] {"NOT NULL"}, false),
-                    new Column("phonenumber", "VARCHAR(15)", new string[] {}, false),
-                    new Column("email", "VARCHAR(50)", new string[]{"NOT NULL" }, false),
-                    new Column("location", "VARCHAR(300)", new string[] {"NOT NULL"}, false)
+                    new Column("sender", "VARCHAR(100)", new string[] {"NOT NULL" }, true),
+                    new Column("receiver", "VARCHAR(100)", new string[] {"NOT NULL" }, true),
+                    new Column("message", "VARCHAR(1000)", new string[]{"NOT NULL" }, false),
+                    new Column("timestamp", "DATETIME", new string[] {"NOT NULL"}, false)
                 }
             )
         };
