@@ -34,10 +34,10 @@ namespace ChatService.Handlers
         public Task Handle(GetChatHistoryRequest message, IMessageHandlerContext context)
         {
             //Save the echo to the database
-            GetChatHistory responseData = ChatServiceDatabase.getInstance().getChatHistory(message);
+            GetChatHistoryResponse responseData = ChatServiceDatabase.getInstance().getChatHistory(message);
 
             //The context is used to give a reply back to the endpoint that sent the request
-            return context.Reply(new GetChatHistoryResponse(true, "Obtained contacts for desired user", responseData));
+            return context.Reply(responseData);
         }
     }
 }
