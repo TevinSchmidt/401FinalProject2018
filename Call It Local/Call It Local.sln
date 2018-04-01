@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26730.12
+VisualStudioVersion = 15.0.27130.2027
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Messages", "Messages\Messages.csproj", "{7262FA14-C402-4162-B12C-548FBED6409C}"
 EndProject
@@ -14,6 +14,9 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DirectoryService", "DirectoryService\DirectoryService.csproj", "{C4A09FBC-B983-425F-9494-8959330F4E29}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReviewService", "ReviewService\ReviewService.csproj", "{1D3805FC-0EB4-47B2-AC96-B8FBF0D64223}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChatService", "EchoService - Copy\ChatService.csproj", "{C8E2C88C-79CF-436A-BF0C-72886E52D025}"
+
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -45,6 +48,12 @@ Global
 		{1D3805FC-0EB4-47B2-AC96-B8FBF0D64223}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1D3805FC-0EB4-47B2-AC96-B8FBF0D64223}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1D3805FC-0EB4-47B2-AC96-B8FBF0D64223}.Release|Any CPU.Build.0 = Release|Any CPU
+
+		{C8E2C88C-79CF-436A-BF0C-72886E52D025}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C8E2C88C-79CF-436A-BF0C-72886E52D025}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C8E2C88C-79CF-436A-BF0C-72886E52D025}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C8E2C88C-79CF-436A-BF0C-72886E52D025}.Release|Any CPU.Build.0 = Release|Any CPU
+
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
