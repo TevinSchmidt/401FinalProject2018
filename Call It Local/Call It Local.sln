@@ -15,7 +15,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DirectoryService", "Directo
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReviewService", "ReviewService\ReviewService.csproj", "{1D3805FC-0EB4-47B2-AC96-B8FBF0D64223}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChatService", "EchoService - Copy\ChatService.csproj", "{C8E2C88C-79CF-436A-BF0C-72886E52D025}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChatService", "ChatService\ChatService.csproj", "{C8E2C88C-79CF-436A-BF0C-72886E52D025}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
