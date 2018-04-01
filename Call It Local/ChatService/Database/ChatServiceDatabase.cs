@@ -1,3 +1,4 @@
+
 ﻿using Messages;
 using Messages.Database;
 using Messages.DataTypes;
@@ -5,6 +6,7 @@ using Messages.NServiceBus.Events;
 using Messages.ServiceBusRequest.Chat.Requests;
 using Messages.NServiceBus.Commands;
 using MySql.Data.MySqlClient;
+
 
 using System;
 using System.Collections.Generic;
@@ -14,9 +16,11 @@ using System.Threading.Tasks;
 
 namespace ChatService.Database
 {
+
     /// <summary>
     /// This portion of the class contains methods and functions
     /// </summary>
+
     public partial class ChatServiceDatabase : AbstractDatabase
     {
         /// <summary>
@@ -117,7 +121,9 @@ namespace ChatService.Database
         /// Both of these properties are required in order for both the base class and the
         /// table definitions below to have access to the variable.
         /// </summary>
+
         private const String dbname = "chatserviceDB";
+
         public override string databaseName { get; } = dbname;
 
         /// <summary>
@@ -134,83 +140,14 @@ namespace ChatService.Database
             new Table
             (
                 dbname,
-                "echoforward",
+                "companies",
                 new Column[]
                 {
-                    new Column
-                    (
-                        "id", "INT(64)",
-                        new string[]
-                        {
-                            "NOT NULL",
-                            "UNIQUE",
-                            "AUTO_INCREMENT"
-                        }, true
-                    ),
-                    new Column
-                    (
-                        "timestamp", "INT(32)",
-                        new string[]
-                        {
-                            "NOT NULL",
-                        }, false
-                    ),
-                    new Column
-                    (
-                        "username", "VARCHAR(50)",
-                        new string[] {},
-                        false
-                    ),
-                    new Column
-                    (
-                        "datain", "VARCHAR(" + SharedData.MAX_MESSAGE_LENGTH.ToString() + ")",
-                        new string[]
-                        {
-                            "NOT NULL"
-                        }, false
-                    ),
-                }
-            ),
-            new Table
-            (
-                dbname,
-                "echoreverse",
-                new Column[]
-                {
-                    new Column
-                    (
-                        "id", "INT(64)",
-                        new string[]
-                        {
-                            "NOT NULL",
-                            "UNIQUE",
-                            "AUTO_INCREMENT"
-                        }, true
-                    ),
-                    new Column
-                    (
-                        "timestamp", "INT(32)",
-                        new string[]
-                        {
-                            "NOT NULL",
-                        }, false
-                    ),
-                    new Column
-                    (
-                        "username", "VARCHAR(50)",
-                        new string[] 
-                        {
-                            "NOT NULL"
-                        }, false
-                    ),
-                    new Column
-                    (
-                        "datain", "VARCHAR(" + SharedData.MAX_MESSAGE_LENGTH.ToString() + ")",
-                        new string[]
-                        {
-                            "NOT NULL"
-                        }, false
-                    ),
+                    new Column("sender", "VARCHAR(100)", new string[] {"NOT NULL" }, true),
+                    new Column("receiver", "VARCHAR(100)", new string[] {"NOT NULL" }, true),
+                    new Column("message", "VARCHAR(1000)", new string[]{"NOT NULL" }, false),
+                    new Column("timestamp", "DATETIME", new string[] {"NOT NULL"}, false)
+
                 }
             )
         };
