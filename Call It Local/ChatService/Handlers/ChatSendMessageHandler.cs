@@ -1,4 +1,4 @@
-﻿
+﻿using ChatService.Database;
 using Messages.NServiceBus.Events;
 using Messages.ServiceBusRequest.Chat.Requests;
 using NServiceBus;
