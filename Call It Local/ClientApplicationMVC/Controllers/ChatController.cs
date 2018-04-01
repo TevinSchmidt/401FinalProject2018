@@ -106,6 +106,7 @@ namespace ClientApplicationMVC.Controllers
             SendMessageRequest request = new SendMessageRequest(chatMessage);
 
             connection.sendChatMessage(request);
+
             return null;
         }
 

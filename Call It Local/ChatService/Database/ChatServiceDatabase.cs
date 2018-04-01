@@ -13,6 +13,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Messages.ServiceBusRequest.Chat.Responses;
 
 namespace ChatService.Database
 {
@@ -49,7 +50,9 @@ namespace ChatService.Database
         {
             if(openConnection() == true)
             {
-                string query = "";
+                string query = @"INSERT INTO " + dbname + @".chat(sender, receiver, message, timestamp)VALUES('" +
+                    message.message.sender + @"', '" + message.message.receiver + @"', '" + message.message.messageContents +
+                    @"', '" + message.message.unix_timestamp + @"');";
 
                 MySqlCommand command = new MySqlCommand(query, connection);
                 command.ExecuteNonQuery();
@@ -66,23 +69,48 @@ namespace ChatService.Database
         /// Gets the contacts for a user from DB.
         /// </summary>
         /// <param name="request"></param>
-        public GetChatContacts getChatContacts(GetChatContactsRequest request)
+        public GetChatContactsResponse getChatContacts(GetChatContactsRequest request)
         {
+            bool result = false;
+            string message = "";
+            GetChatContacts chatContacts = new GetChatContacts();
             if (openConnection() == true)
             {
-                GetChatContacts chatContacts = new GetChatContacts();
-                string query = "";
-                MySqlCommand command = new MySqlCommand(query, connection);
-                command.ExecuteNonQuery();
-                
-                closeConnection();
-                return chatContacts;
+                string query = @"SELECT RECEIVER FROM " + dbname + @".CHAT WHERE SENDER = '" + request.getCommand.usersname +
+                    @"';";
+                try
+                {
+                    MySqlCommand command = new MySqlCommand(query, connection);
+                    MySqlDataReader reader = command.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        chatContacts.contactNames.Add(reader.GetString("RECEIVER"));
+
+                    }
+                    reader.Close();
+                    result = true;
+
+
+                } catch (MySqlException e)
+                {
+                    message = e.Message;
+                } catch (Exception e){
+                    Messages.Debug.consoleMsg("Unable to complete select from chat contacts database." +
+                        " Error :" +  e.Message);
+                    Messages.Debug.consoleMsg("The query was:" + query);
+                    chatContacts.contactNames.Add(e.Message);
+                    message = e.Message;
+                } finally
+                {
+                    closeConnection();
+                }
             }
             else
             {
                 Debug.consoleMsg("Unable to connect to database");
+                message = "Unable to connect to database";
             }
-            return null;
+            return new GetChatContactsResponse(result, message, chatContacts);
         }
 
 
@@ -140,13 +168,13 @@ namespace ChatService.Database
             new Table
             (
                 dbname,
-                "companies",
+                "chat",
                 new Column[]
                 {
-                    new Column("sender", "VARCHAR(100)", new string[] {"NOT NULL" }, true),
-                    new Column("receiver", "VARCHAR(100)", new string[] {"NOT NULL" }, true),
-                    new Column("message", "VARCHAR(1000)", new string[]{"NOT NULL" }, false),
-                    new Column("timestamp", "DATETIME", new string[] {"NOT NULL"}, false)
+                    new Column("sender", "VARCHAR(100)", new string[] {"NOT NULL"}, true),
+                    new Column("receiver", "VARCHAR(100)", new string[] {"NOT NULL"}, true),
+                    new Column("message", "VARCHAR(1000)", new string[]{"NOT NULL"}, false),
+                    new Column("timestamp", "INT(64)", new string[] {"NOT NULL"}, false)
 
                 }
             )
