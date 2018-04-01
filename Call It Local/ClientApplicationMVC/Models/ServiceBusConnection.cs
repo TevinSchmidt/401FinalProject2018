@@ -17,6 +17,7 @@ using Messages.ServiceBusRequest.CompanyDirectory.Requests;
 using Messages.DataTypes.Database.CompanyDirectory;
 using Messages.ServiceBusRequest.CompanyReviews;
 using Messages.ServiceBusRequest.CompanyReviews.Requests;
+using Messages.ServiceBusRequest.Chat.Requests;
 
 namespace ClientApplicationMVC.Models
 {
@@ -127,6 +128,7 @@ namespace ClientApplicationMVC.Models
             send(request);
             return readUntilEOF();
         }
+
 
         #endregion EchoServiceMessages
 
