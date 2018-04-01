@@ -4,10 +4,12 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{17138894-E013-4FE3-89AE-F9B2E56A6FB7}</ProjectGuid>
+
+    <ProjectGuid>{C8E2C88C-79CF-436A-BF0C-72886E52D025}</ProjectGuid>
     <OutputType>Exe</OutputType>
-    <RootNamespace>ChatService</RootNamespace>
-    <AssemblyName>ChatService</AssemblyName>
+    <RootNamespace>EchoService</RootNamespace>
+    <AssemblyName>EchoService</AssemblyName>
+
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -47,7 +49,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Database\ChatServiceDatabase.cs" />
-    <Compile Include="Program.cs" />
+
+    <Compile Include="Handlers\ChatHistoryHandler.cs" />
+    <Compile Include="Handlers\ChatSendMessageHandler.cs" />
+    <Compile Include="Handlers\ContactsRequestHandler.cs" />
+    <Compile Include="ChatProgram.cs" />
+
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -1,7 +1,13 @@
-﻿using Messages.Database;
-using Messages.ServiceBusRequest;
-using Messages.ServiceBusRequest.CompanyDirectory.Responses;
+
+﻿using Messages;
+using Messages.Database;
+using Messages.DataTypes;
+using Messages.NServiceBus.Events;
+using Messages.ServiceBusRequest.Chat.Requests;
+using Messages.NServiceBus.Commands;
 using MySql.Data.MySqlClient;
+
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,6 +16,11 @@ using System.Threading.Tasks;
 
 namespace ChatService.Database
 {
+
+    /// <summary>
+    /// This portion of the class contains methods and functions
+    /// </summary>
+
     public partial class ChatServiceDatabase : AbstractDatabase
     {
         /// <summary>
@@ -31,159 +42,72 @@ namespace ChatService.Database
         }
 
         /// <summary>
-        /// Saves the foreward echo to the database
+        ///Sends a new message to the database
         /// </summary>
-        /// <param name="company">Information about the company</param>
-        public ServiceBusResponse saveCompany(CompanyInstance company)
+        /// <param name="message">Information about the message</param>
+        public void saveMessage(SendMessageRequest message)
         {
-            bool result = false;
-            string message = "";
-
-            if (openConnection() == true)
+            if(openConnection() == true)
             {
-                string query = @"INSERT INTO companies(companyname, phonenumber, email, location)" +
-                    @"VALUES('" + company.companyName + @"', '" + company.phoneNumber + @"', '" +
-                    company.email + @"', '" + company.locations[0] + @"');";
-                try
-                {
-                    MySqlCommand command = new MySqlCommand(query, connection);
-                    command.ExecuteNonQuery();
-                    result = true;
-                }
-                catch (MySqlException e)
-                {
-                    Messages.Debug.consoleMsg("Unable to complete insert new company into database." +
-                        " Error :" + e.Number + e.Message);
-                    Messages.Debug.consoleMsg("The query was:" + query);
-                    message = e.Message;
-                }
-                catch (Exception e)
-                {
-                    Messages.Debug.consoleMsg("Unable to complete insert new user into database." +
-                        " Error:" + e.Message);
-                    message = e.Message;
-                }
-                finally
-                {
-                    closeConnection();
-                }
+                string query = "";
+
+                MySqlCommand command = new MySqlCommand(query, connection);
+                command.ExecuteNonQuery();
+
+                closeConnection();
             }
             else
             {
-                message = "Unable to connect to database";
+                Debug.consoleMsg("Unable to connect to database");
             }
-
-            return new ServiceBusResponse(result, message);
         }
 
-        public CompanySearchResponse searchCompany(CompanySearchRequest company)
+        /// <summary>
+        /// Gets the contacts for a user from DB.
+        /// </summary>
+        /// <param name="request"></param>
+        public GetChatContacts getChatContacts(GetChatContactsRequest request)
         {
-            bool result = false;
-            string message = "";
-            CompanyList list = new CompanyList();
-
-            string query = @"SELECT * FROM " + databaseName + @".companies WHERE companyname LIKE '%" +
-                company.searchDeliminator + @"%';";
-
             if (openConnection() == true)
             {
-                try
-                {
-                    MySqlCommand command = new MySqlCommand(query, connection);
-                    MySqlDataReader dataReader = command.ExecuteReader();
-
-                    List<string> temp = new List<string>();
-                    while (dataReader.Read())
-                    {
-                        temp.Add(dataReader.GetString("companyname"));
-                    }
-                    dataReader.Close();
-                    list.companyNames = temp.ToArray();
-                    result = true;
-                }
-                catch (MySqlException e)
-                {
-                    Messages.Debug.consoleMsg("Unable to complete select from company into database." +
-                        " Error :" + e.Number + e.Message);
-                    Messages.Debug.consoleMsg("The query was:" + query);
-                    message = e.Message;
-                }
-                catch (Exception e)
-                {
-                    Messages.Debug.consoleMsg("Unable to Unable to complete insert new user into database." +
-                        " Error:" + e.Message);
-                    message = e.Message;
-                }
-                finally
-                {
-                    closeConnection();
-                }
+                GetChatContacts chatContacts = new GetChatContacts();
+                string query = "";
+                MySqlCommand command = new MySqlCommand(query, connection);
+                command.ExecuteNonQuery();
+                
+                closeConnection();
+                return chatContacts;
             }
             else
             {
-                message = "Unable to connect to database";
+                Debug.consoleMsg("Unable to connect to database");
             }
-            return new CompanySearchResponse(result, message, list);
+            return null;
         }
 
-        public GetCompanyInfoResponse getCompany(GetCompanyInfoRequest request)
+
+        /// <summary>
+        /// Obtains the chat history for a particular conversation pair.
+        /// </summary>
+        /// <param name="echo">Information about the echo</param>
+        public GetChatHistory getChatHistory(GetChatHistoryRequest request)
         {
-            bool result = false;
-            string message = "";
-            CompanyInstance company = null;
-
-            string query = @"SELECT * FROM " + databaseName + @".companies WHERE companyname='" +
-                request.companyInfo.companyName + @"';";
-
             if (openConnection() == true)
             {
-                try
-                {
-                    MySqlCommand command = new MySqlCommand(query, connection);
-                    MySqlDataReader dataReader = command.ExecuteReader();
+                GetChatHistory ChatHistory = new GetChatHistory();
+                string query = "";
 
+                MySqlCommand command = new MySqlCommand(query, connection);
+                command.ExecuteNonQuery();
 
-                    if (dataReader.Read())
-                    {
-
-                        string companyname = dataReader.GetString("companyname");
-                        string phonenumber = dataReader.GetString("phonenumber");
-                        string email = dataReader.GetString("email");
-                        string location = dataReader.GetString("location");
-
-                        company = new CompanyInstance(companyname, phonenumber, email, new string[] { location });
-                    }
-                    else
-                    {
-                        throw new Exception("Reader cannot read. DirectoryServiceDatabase Error.");
-                    }
-
-                    dataReader.Close();
-                    result = true;
-                }
-                catch (MySqlException e)
-                {
-                    Messages.Debug.consoleMsg("Unable to complete select from company into database." +
-                        " Error :" + e.Number + e.Message);
-                    Messages.Debug.consoleMsg("The query was:" + query);
-                    message = e.Message;
-                }
-                catch (Exception e)
-                {
-                    Messages.Debug.consoleMsg("Unable to Unable to complete insert new user into database." +
-                        " Error:" + e.Message);
-                    message = e.Message;
-                }
-                finally
-                {
-                    closeConnection();
-                }
+                closeConnection();
+                return ChatHistory;
             }
             else
             {
-                message = "Unable to connect to database";
+                Debug.consoleMsg("Unable to connect to database");
             }
-            return new GetCompanyInfoResponse(result, message, company);
+            return null;
         }
     }
 
@@ -197,7 +121,9 @@ namespace ChatService.Database
         /// Both of these properties are required in order for both the base class and the
         /// table definitions below to have access to the variable.
         /// </summary>
-        private const String dbname = "chat";
+
+        private const String dbname = "chatserviceDB";
+
         public override string databaseName { get; } = dbname;
 
         /// <summary>
@@ -221,6 +147,7 @@ namespace ChatService.Database
                     new Column("receiver", "VARCHAR(100)", new string[] {"NOT NULL" }, true),
                     new Column("message", "VARCHAR(1000)", new string[]{"NOT NULL" }, false),
                     new Column("timestamp", "DATETIME", new string[] {"NOT NULL"}, false)
+
                 }
             )
         };
