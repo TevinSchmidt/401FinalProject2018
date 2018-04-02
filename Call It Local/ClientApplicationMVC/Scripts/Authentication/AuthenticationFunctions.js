@@ -18,7 +18,7 @@ function validateCreationForm() {
         window.alert("Must Specify all Boxes.")
         return false;
     }
-    if (accountCreationForm.password.value != accountCreationForm.confirmPassword.value) {
+    if (accountCreationForm.password.value !== accountCreationForm.confirmPassword.value) {
         window.alert("Passwords Do Not Match")
         return false;
     }
