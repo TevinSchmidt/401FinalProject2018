@@ -17,7 +17,9 @@ using Messages.ServiceBusRequest.CompanyDirectory.Requests;
 using Messages.DataTypes.Database.CompanyDirectory;
 using Messages.ServiceBusRequest.CompanyReviews;
 using Messages.ServiceBusRequest.CompanyReviews.Requests;
+using Messages.ServiceBusRequest.Chat;
 using Messages.ServiceBusRequest.Chat.Requests;
+using Messages.ServiceBusRequest.Chat.Responses;
 
 namespace ClientApplicationMVC.Models
 {
@@ -73,7 +75,6 @@ namespace ClientApplicationMVC.Models
 
         #endregion
 
-
         #region AuthenticationServiceMessages
 
 
@@ -103,7 +104,33 @@ namespace ClientApplicationMVC.Models
 
         #endregion AuthenticationServiceMessages
 
-       
+        #region Chat
+
+
+        public GetChatContactsResponse getAllChatContacts(GetChatContactsRequest request)
+        {
+            send(request);
+            ServiceBusResponse resp = readUntilEOF();
+            return (GetChatContactsResponse)resp;
+        }
+
+        public GetChatHistoryResponse getChatHistory(GetChatHistoryRequest request)
+        {
+            send(request);
+            ServiceBusResponse resp = readUntilEOF();
+            return (GetChatHistoryResponse)resp;
+        }
+
+        public ServiceBusResponse sendChatMessage(SendMessageRequest request)
+        {
+            send(request);
+            ServiceBusResponse resp = readUntilEOF();
+            return resp;
+        }
+
+
+        #endregion Chat
+
         #region EchoServiceMessages
 
 

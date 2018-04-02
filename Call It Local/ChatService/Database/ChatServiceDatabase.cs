@@ -7,7 +7,7 @@ using Messages.ServiceBusRequest.Chat.Requests;
 using Messages.NServiceBus.Commands;
 using MySql.Data.MySqlClient;
 
-
+using Messages.DataTypes.Database.Chat;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -118,24 +118,65 @@ namespace ChatService.Database
         /// Obtains the chat history for a particular conversation pair.
         /// </summary>
         /// <param name="echo">Information about the echo</param>
-        public GetChatHistory getChatHistory(GetChatHistoryRequest request)
+        public GetChatHistoryResponse getChatHistory(GetChatHistoryRequest request)
         {
+            bool result = false;
+            string message = "";
+            string user1 = request.getCommand.history.user1;
+            string user2 = request.getCommand.history.user2;
+            List<ChatMessage> msgs = new List<ChatMessage>();
+
             if (openConnection() == true)
             {
                 GetChatHistory ChatHistory = new GetChatHistory();
-                string query = "";
 
-                MySqlCommand command = new MySqlCommand(query, connection);
-                command.ExecuteNonQuery();
+                string query = @"SELECT * FROM " + dbname + @".CHAT WHERE (SENDER = '" + user1 +
+                    @"' AND RECEIVER = '" + user2 + @"') OR (SENDER = '" + user2 + @"' AND RECEIVER = '" + user1 + @"');";
+                try
+                {
+                    MySqlCommand command = new MySqlCommand(query, connection);
+                    MySqlDataReader reader = command.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        ChatMessage msg = new ChatMessage();
+                        msg.sender = reader.GetString("sender");
+                        msg.receiver = reader.GetString("receiver");
+                        msg.unix_timestamp = reader.GetInt32("timestamp");
+                        msg.messageContents = reader.GetString("message");
 
-                closeConnection();
-                return ChatHistory;
+                        msgs.Add(msg);
+
+                    }
+                    reader.Close();
+
+                    request.getCommand.history.messages = msgs;
+                    result = true;
+                    message = "successfuly found history for users";
+
+                }
+                catch (MySqlException e)
+                {
+                    message = e.Message;
+                }
+                catch (Exception e)
+                {
+                    Messages.Debug.consoleMsg("Unable to complete select from chat contacts database." +
+                        " Error :" + e.Message);
+                    Messages.Debug.consoleMsg("The query was:" + query);
+                   
+                    message = e.Message;
+                }
+                finally
+                {
+                    closeConnection();
+                }
             }
             else
             {
                 Debug.consoleMsg("Unable to connect to database");
+                message = "Unable to connect to database";
             }
-            return null;
+            return new GetChatHistoryResponse(result, message, request.getCommand);
         }
     }
 
