@@ -39,7 +39,7 @@ namespace EchoService.Handlers
         public Task Handle(AddReviewEvent message, IMessageHandlerContext context)
         {
             //TODO: fix the next line
-            string url = "http://35.188.63.193/Home/SaveCompanyReview/";
+            string url = "http://35.224.150.78/Home/SaveCompanyReview/";
             HttpClient httpClient = new HttpClient();
             try
             {

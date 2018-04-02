@@ -74,9 +74,11 @@ namespace ChatService.Database
             bool result = false;
             string message = "";
             GetChatContacts chatContacts = new GetChatContacts();
+            chatContacts.contactNames = new List<string>();
             if (openConnection() == true)
             {
                 string query = @"SELECT RECEIVER FROM " + dbname + @".CHAT WHERE SENDER = '" + request.getCommand.usersname +
+                    @"' UNION SELECT SENDER FROM " + dbname + @".CHAT WHERE RECEIVER = '" + request.getCommand.usersname +
                     @"';";
                 try
                 {
@@ -131,7 +133,7 @@ namespace ChatService.Database
                 GetChatHistory ChatHistory = new GetChatHistory();
 
                 string query = @"SELECT * FROM " + dbname + @".CHAT WHERE (SENDER = '" + user1 +
-                    @"' AND RECEIVER = '" + user2 + @"') OR (SENDER = '" + user2 + @"' AND RECEIVER = '" + user1 + @"');";
+                    @"' AND RECEIVER = '" + user2 + @"') OR (SENDER = '" + user2 + @"' AND RECEIVER = '" + user1 + @"') ORDER BY timestamp ASC;";
                 try
                 {
                     MySqlCommand command = new MySqlCommand(query, connection);
@@ -215,7 +217,7 @@ namespace ChatService.Database
                     new Column("sender", "VARCHAR(100)", new string[] {"NOT NULL"}, true),
                     new Column("receiver", "VARCHAR(100)", new string[] {"NOT NULL"}, true),
                     new Column("message", "VARCHAR(1000)", new string[]{"NOT NULL"}, false),
-                    new Column("timestamp", "INT(64)", new string[] {"NOT NULL"}, false)
+                    new Column("timestamp", "INT(64)", new string[] {"NOT NULL"}, true)
 
                 }
             )

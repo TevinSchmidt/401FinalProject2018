@@ -31,7 +31,7 @@ namespace EchoService.Handlers
         public Task Handle(CompanyReviewSearchRequest message, IMessageHandlerContext context)
         {
             //TODO: fix the next line
-            string url = "http://35.188.63.193/Home/GetCompanyReview/";
+            string url = "http://35.224.150.78/Home/GetCompanyReview/";
             HttpClient httpClient = new HttpClient();
 
             try
