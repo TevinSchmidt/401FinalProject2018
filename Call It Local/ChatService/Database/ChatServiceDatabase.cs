@@ -51,17 +51,36 @@ namespace ChatService.Database
         {
             bool result = false;
             string messageResponse = "";
+            string msg = message.message.messageContents.Replace("'","''");
             if (openConnection() == true)
             {
                 string query = @"INSERT INTO " + dbname + @".chat(sender, receiver, message, timestamp)VALUES('" +
-                    message.message.sender + @"', '" + message.message.receiver + @"', '" + message.message.messageContents +
-                    @"', '" + message.message.unix_timestamp + @"');";
+                       message.message.sender + @"', '" + message.message.receiver + @"', '" + msg +
+                       @"', '" + message.message.unix_timestamp + @"');";
+                try
+                { 
+                    MySqlCommand command = new MySqlCommand(query, connection);
+                    command.ExecuteNonQuery();
 
-                MySqlCommand command = new MySqlCommand(query, connection);
-                command.ExecuteNonQuery();
 
-                closeConnection();
-                result = true;
+                    result = true;
+                }
+                catch (MySqlException e)
+                {
+                    messageResponse = e.Message;
+                }
+                catch (Exception ef)
+                {
+                    Messages.Debug.consoleMsg("Unable to complete select from chat contacts database." +
+                        " Error :" + ef.Message);
+                    Messages.Debug.consoleMsg("The query was:" + query);
+
+                    messageResponse = ef.Message;
+
+                }
+                finally {
+                    closeConnection();
+                }
             }
             else
             {
