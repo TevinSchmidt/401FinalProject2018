@@ -30,10 +30,10 @@ namespace ChatService.Handlers
         /// <param name="message">Information about the echo</param>
         /// <param name="context"></param>
         /// <returns>Nothing</returns>
-        public Task Handle(SendMessageRequest message, IMessageHandlerContext context)
+        public ServiceBusResponse Handle(SendMessageRequest message, IMessageHandlerContext context)
         {
-            ChatServiceDatabase.getInstance().saveMessage(message);
-            return Task.CompletedTask;
+            
+            return ChatServiceDatabase.getInstance().saveMessage(message);
         }
     }
 }

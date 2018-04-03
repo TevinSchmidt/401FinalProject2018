@@ -14,6 +14,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Messages.ServiceBusRequest.Chat.Responses;
+using Messages.ServiceBusRequest;
 
 namespace ChatService.Database
 {
@@ -46,9 +47,11 @@ namespace ChatService.Database
         ///Sends a new message to the database
         /// </summary>
         /// <param name="message">Information about the message</param>
-        public void saveMessage(SendMessageRequest message)
+        public ServiceBusResponse saveMessage(SendMessageRequest message)
         {
-            if(openConnection() == true)
+            bool result = false;
+            string messageResponse = "";
+            if (openConnection() == true)
             {
                 string query = @"INSERT INTO " + dbname + @".chat(sender, receiver, message, timestamp)VALUES('" +
                     message.message.sender + @"', '" + message.message.receiver + @"', '" + message.message.messageContents +
@@ -58,11 +61,15 @@ namespace ChatService.Database
                 command.ExecuteNonQuery();
 
                 closeConnection();
+                result = true;
             }
             else
             {
                 Debug.consoleMsg("Unable to connect to database");
+                messageResponse = "Unable to connect to database";
             }
+
+            return new ServiceBusResponse(result, messageResponse);
         }
 
         /// <summary>

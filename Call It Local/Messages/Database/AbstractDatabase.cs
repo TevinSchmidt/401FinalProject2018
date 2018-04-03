@@ -222,7 +222,7 @@ namespace Messages.Database
         /// This is the password used to login to the database by the connection
         /// </summary>
 
-        private const string Password = "root";
+        private const string Password = "Security4";
 
 
         /// <summary>

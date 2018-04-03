@@ -18,4 +18,5 @@ namespace Messages.ServiceBusRequest.Chat.Responses
         /// </summary>
         public GetChatContacts responseData;
     }
+
 }
