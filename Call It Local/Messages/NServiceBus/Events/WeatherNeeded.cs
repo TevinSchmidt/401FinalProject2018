@@ -9,7 +9,7 @@ using NServiceBus;
 
 namespace Messages.NServiceBus.Events
 {
-    class WeatherNeeded : IEvent
+    public class WeatherNeeded : IEvent
     {
         public WeatherNeeded()
         {

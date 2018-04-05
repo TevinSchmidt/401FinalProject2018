@@ -4,7 +4,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{2955517B-2387-46AA-A2C3-37CC63A77363}</ProjectGuid>
+    <ProjectGuid>{B9FB8F52-B5F5-4508-BB65-5A552DB400A1}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <RootNamespace>EchoService</RootNamespace>
     <AssemblyName>EchoService</AssemblyName>
@@ -57,10 +57,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Database\EchoServiceDatabase.cs" />
-    <Compile Include="Handlers\EchoEventHandler.cs" />
-    <Compile Include="Handlers\ReverseEchoHandler.cs" />
-    <Compile Include="Program.cs" />
+    <Compile Include="Handlers\WeatherHandler.cs" />
+    <Compile Include="WeatherProgram.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
