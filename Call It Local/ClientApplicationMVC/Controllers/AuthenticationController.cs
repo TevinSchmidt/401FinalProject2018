@@ -51,6 +51,12 @@ namespace ClientApplicationMVC.Controllers
 
         }
 
+        public ActionResult LogOut()
+        {
+            Globals.removeUser();
+            return RedirectToAction("Index", "Home");
+        }
+
         public ActionResult CreateAccount()
         {
             

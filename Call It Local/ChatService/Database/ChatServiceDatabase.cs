@@ -14,6 +14,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Messages.ServiceBusRequest.Chat.Responses;
+using Messages.ServiceBusRequest;
 
 namespace ChatService.Database
 {
@@ -46,23 +47,48 @@ namespace ChatService.Database
         ///Sends a new message to the database
         /// </summary>
         /// <param name="message">Information about the message</param>
-        public void saveMessage(SendMessageRequest message)
+        public ServiceBusResponse saveMessage(SendMessageRequest message)
         {
-            if(openConnection() == true)
+            bool result = false;
+            string messageResponse = "";
+            string msg = message.message.messageContents.Replace("'","''");
+            if (openConnection() == true)
             {
                 string query = @"INSERT INTO " + dbname + @".chat(sender, receiver, message, timestamp)VALUES('" +
-                    message.message.sender + @"', '" + message.message.receiver + @"', '" + message.message.messageContents +
-                    @"', '" + message.message.unix_timestamp + @"');";
+                       message.message.sender + @"', '" + message.message.receiver + @"', '" + msg +
+                       @"', '" + message.message.unix_timestamp + @"');";
+                try
+                { 
+                    MySqlCommand command = new MySqlCommand(query, connection);
+                    command.ExecuteNonQuery();
 
-                MySqlCommand command = new MySqlCommand(query, connection);
-                command.ExecuteNonQuery();
 
-                closeConnection();
+                    result = true;
+                }
+                catch (MySqlException e)
+                {
+                    messageResponse = e.Message;
+                }
+                catch (Exception ef)
+                {
+                    Messages.Debug.consoleMsg("Unable to complete select from chat contacts database." +
+                        " Error :" + ef.Message);
+                    Messages.Debug.consoleMsg("The query was:" + query);
+
+                    messageResponse = ef.Message;
+
+                }
+                finally {
+                    closeConnection();
+                }
             }
             else
             {
                 Debug.consoleMsg("Unable to connect to database");
+                messageResponse = "Unable to connect to database";
             }
+
+            return new ServiceBusResponse(result, messageResponse);
         }
 
         /// <summary>
@@ -74,9 +100,11 @@ namespace ChatService.Database
             bool result = false;
             string message = "";
             GetChatContacts chatContacts = new GetChatContacts();
+            chatContacts.contactNames = new List<string>();
             if (openConnection() == true)
             {
                 string query = @"SELECT RECEIVER FROM " + dbname + @".CHAT WHERE SENDER = '" + request.getCommand.usersname +
+                    @"' UNION SELECT SENDER FROM " + dbname + @".CHAT WHERE RECEIVER = '" + request.getCommand.usersname +
                     @"';";
                 try
                 {
@@ -131,7 +159,7 @@ namespace ChatService.Database
                 GetChatHistory ChatHistory = new GetChatHistory();
 
                 string query = @"SELECT * FROM " + dbname + @".CHAT WHERE (SENDER = '" + user1 +
-                    @"' AND RECEIVER = '" + user2 + @"') OR (SENDER = '" + user2 + @"' AND RECEIVER = '" + user1 + @"');";
+                    @"' AND RECEIVER = '" + user2 + @"') OR (SENDER = '" + user2 + @"' AND RECEIVER = '" + user1 + @"') ORDER BY timestamp ASC;";
                 try
                 {
                     MySqlCommand command = new MySqlCommand(query, connection);
@@ -215,7 +243,7 @@ namespace ChatService.Database
                     new Column("sender", "VARCHAR(100)", new string[] {"NOT NULL"}, true),
                     new Column("receiver", "VARCHAR(100)", new string[] {"NOT NULL"}, true),
                     new Column("message", "VARCHAR(1000)", new string[]{"NOT NULL"}, false),
-                    new Column("timestamp", "INT(64)", new string[] {"NOT NULL"}, false)
+                    new Column("timestamp", "INT(64)", new string[] {"NOT NULL"}, true)
 
                 }
             )

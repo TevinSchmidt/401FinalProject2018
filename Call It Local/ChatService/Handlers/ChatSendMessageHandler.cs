@@ -2,6 +2,7 @@
 using ChatService.Database;
 using Messages.NServiceBus.Events;
 using Messages.ServiceBusRequest.Chat.Requests;
+using Messages.ServiceBusRequest;
 using NServiceBus;
 using NServiceBus.Logging;
 
@@ -13,7 +14,7 @@ namespace ChatService.Handlers
     /// This is the handler class for the reverse echo. 
     /// This class is created and its methods called by the NServiceBus framework
     /// </summary>
-    public class EchoEventHandler : IHandleMessages<SendMessageRequest>
+    public class ChatSendMessageHandler : IHandleMessages<SendMessageRequest>
     {
         /// <summary>
         /// This is a class provided by NServiceBus. Its main purpose is to be use log.Info() instead of Messages.Debug.consoleMsg().
@@ -32,8 +33,8 @@ namespace ChatService.Handlers
         /// <returns>Nothing</returns>
         public Task Handle(SendMessageRequest message, IMessageHandlerContext context)
         {
-            ChatServiceDatabase.getInstance().saveMessage(message);
-            return Task.CompletedTask;
+            ServiceBusResponse response = ChatServiceDatabase.getInstance().saveMessage(message);
+            return context.Reply(response);
         }
     }
 }

@@ -40,6 +40,14 @@ namespace ClientApplicationMVC.Models
         }
 
         /// <summary>
+        /// Removes the name of current user
+        /// </summary>
+        public static void removeUser()
+        {
+            HttpContext.Current.Session["user"] = "Log In";
+        }
+
+        /// <summary>
         /// gets the name of the current user
         /// </summary>
         /// <returns>The name of the current user</returns>
