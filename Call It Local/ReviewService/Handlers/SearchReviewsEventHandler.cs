@@ -9,13 +9,11 @@ using Messages.ServiceBusRequest;
 using NServiceBus;
 using NServiceBus.Logging;
 using Newtonsoft.Json;
-using System.Net.Http;
-using System.Text;
-using System.Threading.Tasks;
+
 using Messages.ServiceBusRequest.CompanyReviews;
 using Messages.ServiceBusRequest.CompanyReviews.Requests;
 using Messages.DataTypes.Database.CompanyReview;
-using System.Collections.Generic;
+
 namespace EchoService.Handlers
 {
     class SearchReviewsEventHandler : IHandleMessages<CompanyReviewSearchRequest>
@@ -48,11 +46,11 @@ namespace EchoService.Handlers
                 }
                 
             }
-            catch (HttpRequestException e)
+            catch (HttpRequestException)
             {
                 //TODO: Error Message
             }
-            catch (Exception eg) { }
+            catch (Exception) { }
             return context.Reply(new CompanyReviewResponse(false, "FAILED to acomplish task with messageID: " + context.MessageId, null));
         }
     }

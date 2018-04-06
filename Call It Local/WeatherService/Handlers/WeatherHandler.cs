@@ -1,4 +1,4 @@
-﻿
+﻿using Newtonsoft.Json.Linq;
 
 using Messages.NServiceBus.Events;
 using NServiceBus;
@@ -7,13 +7,10 @@ using Messages.ServiceBusRequest.Weather.Requests;
 using Messages.ServiceBusRequest.Weather.Response;
 using Messages.DataTypes;
 using System.Threading.Tasks;
-using Messages.NServiceBus.Events;
+
 using System.Net.Http;
 using Messages.ServiceBusRequest;
-using NServiceBus;
-using NServiceBus.Logging;
-using Newtonsoft.Json;
-using System.Net.Http;
+
 using System.Text;
 using Messages.ServiceBusRequest.CompanyReviews;
 using Messages.ServiceBusRequest.CompanyReviews.Requests;
@@ -43,28 +40,38 @@ namespace EchoService.Handlers
         /// <returns>Nothing</returns>
         public Task Handle(WeatherNeededRequest message, IMessageHandlerContext context)
         {
-            string url = "";
+            string apiKey = "jIuGVibBuDNp7QRnPJ0HWfvAiuzaQINC";
+            string city = message.location;
+            string url = "https://dataservice.accuweather.com/locations/v1/cities/search?apikey=" +
+                apiKey + "&q=" + city;
             HttpClient httpClient = new HttpClient();
             try
             {
-                string json = message.location;
+                
                 //Get information regarding the key, using the location provided
                 httpClient.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
-                HttpResponseMessage wcfresponse = httpClient.PostAsync(url, new StringContent(json, Encoding.UTF8, "application/json")).GetAwaiter().GetResult();
-                string jsonWithKEY = wcfresponse.Content.ReadAsStringAsync().GetAwaiter().GetResult();
+                HttpResponseMessage wcfresponse = httpClient.GetAsync(url).GetAwaiter().GetResult();
+                string response = wcfresponse.Content.ReadAsStringAsync().GetAwaiter().GetResult();
+                
+                var json = JArray.Parse(response);
+
+             
 
                 //Get weather data based on the key
-                string extractedKey = jsonWithKEY;
-                url = ""; //forecast data url
+                string extractedKey = json[0].Value<string>("Key");
+                url = "https://dataservice.accuweather.com/currentconditions/v1/"
+                    + extractedKey + "?apikey=" + apiKey; //forecast data url
                 httpClient.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
-                wcfresponse = httpClient.PostAsync(url, new StringContent(extractedKey, Encoding.UTF8, "application/json")).GetAwaiter().GetResult();
+                wcfresponse = httpClient.GetAsync(url).GetAwaiter().GetResult();
                 string resultingData = wcfresponse.Content.ReadAsStringAsync().GetAwaiter().GetResult();
 
-                string temp;
-                string cloudCover;
-                string realFeel;
+                var weatherData = JArray.Parse(resultingData);
+                string temp = weatherData[0]["Temperature"]["Metric"].Value<string>("Value");
+                string tempUnit = weatherData[0]["Temperature"]["Metric"].Value<string>("Unit");
+                string weatherText = weatherData[0].Value<string>("WeatherText");
+                string weatherIcon = weatherData[0].Value<string>("WeatherIcon");
                 //remove data from resultingData that is required
-                WeatherData WD = new WeatherData(temp, cloudCover, realFeel);
+                WeatherData WD = new WeatherData(temp, tempUnit, weatherText, weatherIcon);
                 return context.Reply(new WeatherNeededResponse(true, "Weather for: " + message.location, WD));
             }
             catch

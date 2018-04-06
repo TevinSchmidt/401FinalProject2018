@@ -65,7 +65,7 @@ namespace WeatherService
 
             Debug.consoleMsg("Press Enter to exit.");
             Console.ReadLine();
-            string entry;
+            //string entry;
             /*
             do
             {
