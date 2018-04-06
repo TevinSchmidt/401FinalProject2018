@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace Messages.ServiceBusRequest.Weather.Requests
 {
+    [Serializable]
     public class WeatherNeededRequest : ServiceBusRequest
     {
         /// <summary>

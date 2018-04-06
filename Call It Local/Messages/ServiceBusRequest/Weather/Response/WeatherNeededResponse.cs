@@ -7,6 +7,7 @@ using Messages.DataTypes;
 
 namespace Messages.ServiceBusRequest.Weather.Response
 {
+    [Serializable]
     public class WeatherNeededResponse : ServiceBusResponse
     {
         public WeatherNeededResponse(bool result, string response, WeatherData WD) : base (result, response)
