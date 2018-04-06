@@ -66,6 +66,7 @@
     <Compile Include="DataTypes\Database\CompanyReview\CompanyReview.cs" />
     <Compile Include="DataTypes\Enums.cs" />
     <Compile Include="DataTypes\SharedData.cs" />
+    <Compile Include="DataTypes\Database\Weather\WeatherData.cs" />
     <Compile Include="Debug\Debug.cs" />
     <Compile Include="NServiceBus\Commands\CreateAccount.cs" />
     <Compile Include="NServiceBus\Commands\GetChatContacts.cs" />
@@ -74,6 +75,7 @@
     <Compile Include="NServiceBus\Events\AsIsEchoEvent.cs" />
     <Compile Include="NServiceBus\Events\ClientLogInAttempted.cs" />
     <Compile Include="NServiceBus\Events\AddReviewEvent.cs" />
+    <Compile Include="NServiceBus\Events\WeatherNeeded.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ServiceBusRequest\Authentication\AuthenticationServiceRequest.cs" />
     <Compile Include="ServiceBusRequest\Authentication\Requests\CreateAccountRequest.cs" />
@@ -98,6 +100,8 @@
     <Compile Include="ServiceBusRequest\Echo\Requests\ReverseEchoRequest.cs" />
     <Compile Include="ServiceBusRequest\ServiceBusRequest.cs" />
     <Compile Include="ServiceBusRequest\ServiceBusResponse.cs" />
+    <Compile Include="ServiceBusRequest\Weather\Requests\WeatherNeededRequest.cs" />
+    <Compile Include="ServiceBusRequest\Weather\Response\WeatherNeededResponse.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
@@ -116,5 +120,6 @@
     <Content Include="docs\MySqlParameterCollection.xml" />
     <Content Include="docs\MySqlTransaction.xml" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
