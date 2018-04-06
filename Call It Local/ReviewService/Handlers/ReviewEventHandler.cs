@@ -4,7 +4,7 @@ using Messages.ServiceBusRequest;
 using NServiceBus;
 using NServiceBus.Logging;
 using Newtonsoft.Json;
-using System.Net.Http;
+
 using System.Text;
 using System.Threading.Tasks;
 using Messages.ServiceBusRequest.CompanyReviews;
@@ -49,7 +49,7 @@ namespace EchoService.Handlers
                 HttpResponseMessage wcfresponse = httpClient.PostAsync(url, new StringContent(json, Encoding.UTF8, "application/json")).GetAwaiter().GetResult();
                 return Task.CompletedTask;
             }
-            catch(HttpRequestException e)
+            catch(HttpRequestException)
             {
                 //TODO: Error Message
             }

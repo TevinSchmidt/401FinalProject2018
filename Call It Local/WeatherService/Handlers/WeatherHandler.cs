@@ -7,13 +7,10 @@ using Messages.ServiceBusRequest.Weather.Requests;
 using Messages.ServiceBusRequest.Weather.Response;
 using Messages.DataTypes;
 using System.Threading.Tasks;
-using Messages.NServiceBus.Events;
+
 using System.Net.Http;
 using Messages.ServiceBusRequest;
-using NServiceBus;
-using NServiceBus.Logging;
-using Newtonsoft.Json;
-using System.Net.Http;
+
 using System.Text;
 using Messages.ServiceBusRequest.CompanyReviews;
 using Messages.ServiceBusRequest.CompanyReviews.Requests;
