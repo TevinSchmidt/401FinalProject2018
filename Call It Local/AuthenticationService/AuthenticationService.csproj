@@ -60,6 +60,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Communication\ClientConnection\ClientConnection_Weather.cs" />
     <Compile Include="Communication\ClientConnection\ClientConnection_Authentication.cs" />
     <Compile Include="Communication\ClientConnection\ClientConnection_Chat.cs" />
     <Compile Include="Communication\ClientConnection\ClientConnection_CompanyDirectory.cs" />

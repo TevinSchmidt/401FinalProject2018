@@ -6,6 +6,7 @@ using Messages.ServiceBusRequest.Echo;
 using Messages.ServiceBusRequest.CompanyDirectory;
 using Messages.ServiceBusRequest.CompanyReviews;
 using Messages.ServiceBusRequest.Chat;
+using Messages.ServiceBusRequest.Weather.Requests;
 
 using NServiceBus;
 
@@ -92,6 +93,8 @@ namespace AuthenticationService.Communication
                     return reviewRequest((CompanyReviewServiceRequest)request);
                 case (Service.Chat):
                     return chatRequest((ChatServiceRequest)request);
+                case (Service.Weather):
+                    return weatherRequest((WeatherNeededRequest)request);
                 default:
                     return new ServiceBusResponse(false, "Error: Invalid request. Did not specify a valid service type. Specified type was: " + request.serviceRequested.ToString());
             }
