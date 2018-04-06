@@ -8,14 +8,16 @@ namespace Messages.DataTypes
 {
     public class WeatherData
     {
-        public WeatherData(string temp, string cloudcover, string realFeel)
+        public WeatherData(string temp, string tempUnit, string weatherText, string iconNum)
         {
             this.temp = temp;
-            this.cloudcover = cloudcover;
-            this.realFeel = realFeel;
+            this.tempUnit = tempUnit;
+            this.weatherText = weatherText;
+            this.iconNum = iconNum;
         }
         public string temp;
-        public string cloudcover;
-        public string realFeel;
+        public string weatherText;
+        public string tempUnit;
+        public string iconNum;
     }
 }
