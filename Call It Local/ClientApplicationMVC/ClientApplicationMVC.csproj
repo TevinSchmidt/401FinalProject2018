@@ -213,6 +213,48 @@
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
+    <Content Include="Views\CompanyListings\icon.jpg" />
+    <Content Include="Views\CompanyListings\Icons\11\icon.png" />
+    <Content Include="Views\CompanyListings\Icons\12\icon.png" />
+    <Content Include="Views\CompanyListings\Icons\13\icon.png" />
+    <Content Include="Views\CompanyListings\Icons\14\icon.png" />
+    <Content Include="Views\CompanyListings\Icons\15\icon.png" />
+    <Content Include="Views\CompanyListings\Icons\16\icon.png" />
+    <Content Include="Views\CompanyListings\Icons\17\icon.png" />
+    <Content Include="Views\CompanyListings\Icons\18\icon.png" />
+    <Content Include="Views\CompanyListings\Icons\19\icon.png" />
+    <Content Include="Views\CompanyListings\Icons\1\icon.png" />
+    <Content Include="Views\CompanyListings\Icons\20\icon.png" />
+    <Content Include="Views\CompanyListings\Icons\21\icon.png" />
+    <Content Include="Views\CompanyListings\Icons\22\icon.png" />
+    <Content Include="Views\CompanyListings\Icons\23\icon.png" />
+    <Content Include="Views\CompanyListings\Icons\24\icon.png" />
+    <Content Include="Views\CompanyListings\Icons\25\icon.png" />
+    <Content Include="Views\CompanyListings\Icons\26\icon.png" />
+    <Content Include="Views\CompanyListings\Icons\29\icon.png" />
+    <Content Include="Views\CompanyListings\Icons\2\icon.png" />
+    <Content Include="Views\CompanyListings\Icons\30\icon.png" />
+    <Content Include="Views\CompanyListings\Icons\31\icon.png" />
+    <Content Include="Views\CompanyListings\Icons\32\icon.png" />
+    <Content Include="Views\CompanyListings\Icons\33\icon.png" />
+    <Content Include="Views\CompanyListings\Icons\34\icon.png" />
+    <Content Include="Views\CompanyListings\Icons\35\icon.png" />
+    <Content Include="Views\CompanyListings\Icons\36\icon.png" />
+    <Content Include="Views\CompanyListings\Icons\37\icon.png" />
+    <Content Include="Views\CompanyListings\Icons\38\icon.png" />
+    <Content Include="Views\CompanyListings\Icons\39\icon.png" />
+    <Content Include="Views\CompanyListings\Icons\3\icon.png" />
+    <Content Include="Views\CompanyListings\Icons\40\icon.png" />
+    <Content Include="Views\CompanyListings\Icons\41\icon.png" />
+    <Content Include="Views\CompanyListings\Icons\42\icon.png" />
+    <Content Include="Views\CompanyListings\Icons\43\icon.png" />
+    <Content Include="Views\CompanyListings\Icons\44\icon.png" />
+    <Content Include="Views\CompanyListings\Icons\4\icon.png" />
+    <Content Include="Views\CompanyListings\Icons\5\icon.png" />
+    <Content Include="Views\CompanyListings\Icons\6\icon.png" />
+    <Content Include="Views\CompanyListings\Icons\7\icon.png" />
+    <Content Include="Views\CompanyListings\Icons\8\icon.png" />
+    <Content Include="Views\CompanyListings\road_PNG46.png" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -237,6 +279,10 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\CompanyListings\Icons\10\" />
+    <Folder Include="Views\CompanyListings\Icons\27\" />
+    <Folder Include="Views\CompanyListings\Icons\28\" />
+    <Folder Include="Views\CompanyListings\Icons\9\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
