@@ -22,12 +22,13 @@
         }
         </div>
         <div class="col-sm-6">
-            <h3>Calgary</h3>
+            <h3>@ViewBag.CompanyInfo.locations[0]</h3>
+            <p>@ViewBag.WeatherData.weatherText</p>
             <figure class="col-sm-3">
-                <img src="@Url.Content("~\\Views\\CompanyListings\\Icons\\1\\icon.png")">
-                <p>Feels like:</p>
+                <img src="@Url.Content("~\\Views\\CompanyListings\\Icons\\" + @ViewBag.WeatherData.iconNum + "\\icon.png")">
+                <p>Feels like: </p>
             </figure>
-            <p class="col-sm-3">15 C</p>
+            <p class="col-sm-3">@ViewBag.WeatherData.temp @ViewBag.WeatherData.tempUnit</p>
 
         </div>
     </div>
