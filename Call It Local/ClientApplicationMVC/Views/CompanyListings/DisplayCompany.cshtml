@@ -4,21 +4,34 @@
 <script type="text/javascript" src="~/Scripts/CompanyListings/CompanyListingsFunctions.js"></script>
 
 <h2 id="CompanyNameDisplay">@ViewBag.CompanyName</h2>
+<section class="container">
+    <div class="row">
+        <div class="col-sm-6"
+        <br />
+        <p>Email: @ViewBag.CompanyInfo.email</p>
+        <br />
+        <p>Phone Number: @ViewBag.CompanyInfo.phoneNumber</p>
+        <br />
+        <p>@ViewBag.CompanyName can be found at these locations:</p>
+        <br />
 
-<br />
-<p>Email: @ViewBag.CompanyInfo.email</p>
-<br />
-<p>Phone Number: @ViewBag.CompanyInfo.phoneNumber</p>
-<br />
-<p>@ViewBag.CompanyName can be found at these locations:</p>
-<br />
+        @foreach(string location in ViewBag.CompanyInfo.locations)
+        {
+            <p style="padding-left:4em;">@location</p>
+            <br />
+        }
+        </div>
+        <div class="col-sm-6">
+            <h3>Calgary</h3>
+            <figure class="col-sm-3">
+                <img src="@Url.Content("~\\Views\\CompanyListings\\Icons\\1\\icon.png")">
+                <p>Feels like:</p>
+            </figure>
+            <p class="col-sm-3">15 C</p>
 
-@foreach(string location in ViewBag.CompanyInfo.locations)
-{
-    <p style="padding-left:4em;">@location</p>
-    <br />
-}
-
+        </div>
+    </div>
+</section>
 
 <div style="height:100px">
     <h4>Start a conversation with @ViewBag.CompanyName</h4>
