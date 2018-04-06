@@ -20,7 +20,8 @@ using Messages.ServiceBusRequest.CompanyReviews.Requests;
 using Messages.ServiceBusRequest.Chat;
 using Messages.ServiceBusRequest.Chat.Requests;
 using Messages.ServiceBusRequest.Chat.Responses;
-
+using Messages.ServiceBusRequest.Weather.Requests;
+using Messages.ServiceBusRequest.Weather.Response;
 namespace ClientApplicationMVC.Models
 {
     /// <summary>
@@ -74,6 +75,7 @@ namespace ClientApplicationMVC.Models
         }
 
         #endregion
+
 
         #region AuthenticationServiceMessages
 
@@ -158,6 +160,17 @@ namespace ClientApplicationMVC.Models
 
 
         #endregion EchoServiceMessages
+
+        #region WeatherService
+
+        public WeatherNeededResponse getWeatherData(WeatherNeededRequest request)
+        {
+            send(request);
+            ServiceBusResponse resp = readUntilEOF();
+            return (WeatherNeededResponse)resp;
+        }
+
+        #endregion WeatherService
 
         #endregion ServiceBusMessages
 
