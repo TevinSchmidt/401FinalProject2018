@@ -60,7 +60,7 @@ namespace EchoService.Handlers
                 //Get weather data based on the key
                 string extractedKey = json[0].Value<string>("Key");
                 url = "https://dataservice.accuweather.com/currentconditions/v1/"
-                    + extractedKey + "?apikey=" + apiKey; //forecast data url
+                    + extractedKey + "?apikey=" + apiKey + "&details=true"; //forecast data url
                 httpClient.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
                 wcfresponse = httpClient.GetAsync(url).GetAwaiter().GetResult();
                 string resultingData = wcfresponse.Content.ReadAsStringAsync().GetAwaiter().GetResult();
@@ -70,8 +70,10 @@ namespace EchoService.Handlers
                 string tempUnit = weatherData[0]["Temperature"]["Metric"].Value<string>("Unit");
                 string weatherText = weatherData[0].Value<string>("WeatherText");
                 string weatherIcon = weatherData[0].Value<string>("WeatherIcon");
+                string realTemp = weatherData[0]["RealFeelTemperature"]["Metric"].Value<string>("Value");
+                string realTempUnit = weatherData[0]["RealFeelTemperature"]["Metric"].Value<string>("Unit");
                 //remove data from resultingData that is required
-                WeatherData WD = new WeatherData(temp, tempUnit, weatherText, weatherIcon);
+                WeatherData WD = new WeatherData(temp, tempUnit, realTemp, realTempUnit, weatherText, weatherIcon);
                 return context.Reply(new WeatherNeededResponse(true, "Weather for: " + message.location, WD));
             }
             catch
