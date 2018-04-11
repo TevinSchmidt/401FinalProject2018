@@ -121,8 +121,8 @@ namespace ClientApplicationMVC.Controllers
             location = infoResponse.companyInfo.locations[0];
 
             //CompanyReviewSearchRequest reviewRequest = new CompanyReviewSearchRequest(id);
-            //CompanyReviewResponse reviewResponse = connection.searchCompanyReview(reviewRequest);
-            //ViewBag.Reviewlist = reviewResponse.reviews;
+           // CompanyReviewResponse reviewResponse = connection.searchCompanyReview(reviewRequest);
+           // ViewBag.Reviewlist = reviewResponse.reviews;
 
             WeatherNeededRequest weatherRequest = new WeatherNeededRequest(location);
             WeatherNeededResponse weatherResponse = connection.getWeatherData(weatherRequest);
