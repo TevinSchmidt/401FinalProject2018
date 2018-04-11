@@ -15,11 +15,11 @@ function validateCreationForm() {
         || accountCreationForm.password.value === "" || accountCreationForm.confirmPassword.value === ""
         || accountCreationForm.address.value === "" || accountCreationForm.users.value === "Select Type"
         || accountCreationForm.phonenumber.value === "") {
-        window.alert("Must Specify all Boxes.")
+		window.alert("Must Specify all Boxes.");
         return false;
     }
-    if (accountCreationForm.password.value != accountCreationForm.confirmPassword.value) {
-        window.alert("Passwords Do Not Match")
+    if (accountCreationForm.password.value !== accountCreationForm.confirmPassword.value) {
+		window.alert("Passwords Do Not Match");
         return false;
     }
     var email = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;

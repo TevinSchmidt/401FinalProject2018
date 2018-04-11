@@ -9,37 +9,48 @@ using Messages.ServiceBusRequest;
 using NServiceBus;
 using NServiceBus.Logging;
 using Newtonsoft.Json;
-using System.Net.Http;
-using System.Text;
-using System.Threading.Tasks;
+
 using Messages.ServiceBusRequest.CompanyReviews;
 using Messages.ServiceBusRequest.CompanyReviews.Requests;
 using Messages.DataTypes.Database.CompanyReview;
-using System.Collections.Generic;
+
 namespace EchoService.Handlers
 {
     class SearchReviewsEventHandler : IHandleMessages<CompanyReviewSearchRequest>
     {
+        private class ReviewList {
+            [JsonProperty("reviews")]
+            public List<Review> allReviews { get; set; }
+            public int count { get; set; }
+        } 
 
         static ILog log = LogManager.GetLogger<CompanyReviewSearchRequest>();
 
         public Task Handle(CompanyReviewSearchRequest message, IMessageHandlerContext context)
         {
             //TODO: fix the next line
-            string url = "NEED TO PUT THE URL HERE";
+            string url = "http://35.224.150.78/Home/GetCompanyReview/";
             HttpClient httpClient = new HttpClient();
+
             try
             {
                 string company = "{\"companyName\":\"" + message.companyName + "\"}";
                 httpClient.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
-                System.Threading.Tasks.Task<HttpResponseMessage> wcfresponse = httpClient.PostAsync(url, new StringContent(company, Encoding.UTF8, "application/json"));
-                List<Review> reviews = JsonConvert.DeserializeObject<List<Review>>(wcfresponse.ToString());
-                return context.Reply(new CompanyReviewResponse(true, "Reviews for company name : " + message.companyName, reviews));
+                HttpResponseMessage wcfresponse = httpClient.GetAsync(url + company).GetAwaiter().GetResult();
+                string test = wcfresponse.Content.ReadAsStringAsync().GetAwaiter().GetResult();
+                
+                ReviewList reviews = JsonConvert.DeserializeObject<ReviewList>(test);
+                if (reviews.count <= 0)
+                {
+                    return context.Reply(new CompanyReviewResponse(true, "Reviews for company name : " + message.companyName, reviews.allReviews));
+                }
+                
             }
-            catch (HttpRequestException e)
+            catch (HttpRequestException)
             {
                 //TODO: Error Message
             }
+            catch (Exception) { }
             return context.Reply(new CompanyReviewResponse(false, "FAILED to acomplish task with messageID: " + context.MessageId, null));
         }
     }

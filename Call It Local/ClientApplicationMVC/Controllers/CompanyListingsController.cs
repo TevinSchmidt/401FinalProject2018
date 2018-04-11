@@ -12,6 +12,8 @@ using System.Web.Routing;
 using Messages.ServiceBusRequest.CompanyReviews;
 using Messages.ServiceBusRequest.CompanyReviews.Requests;
 using Messages.DataTypes.Database.CompanyReview;
+using Messages.ServiceBusRequest.Weather.Requests;
+using Messages.ServiceBusRequest.Weather.Response;
 
 namespace ClientApplicationMVC.Controllers
 {
@@ -20,6 +22,7 @@ namespace ClientApplicationMVC.Controllers
     /// </summary>
     public class CompanyListingsController : Controller
     {
+        private static string companyNameeeee;
         /// <summary>
         /// This function is called when the client navigates to *hostname*/CompanyListings
         /// </summary>
@@ -78,12 +81,12 @@ namespace ClientApplicationMVC.Controllers
                 return RedirectToAction("Index", "Authentication");
             }
             DateTime now = DateTime.Now;
-            AddCompanyReviewRequest request = new AddCompanyReviewRequest(new Review(ViewBag.CompanyName, companyReview, companyStars, now.ToString(), Globals.getUser()));
+            AddCompanyReviewRequest request = new AddCompanyReviewRequest(new Review(companyNameeeee, companyReview, companyStars, now.ToString(), Globals.getUser()));
             ServiceBusResponse response = connection.addCompanyReview(request);
             
             //Can check if result is true here or just redirect to displaycompany and reload page
-
-            return RedirectToAction("DisplayCompany");
+            
+            return RedirectToAction("Index");
         }
 
         /// <summary>
@@ -109,15 +112,22 @@ namespace ClientApplicationMVC.Controllers
             }
 
             ViewBag.CompanyName = id;
+            companyNameeeee = id;
+            string location = "";
 
             GetCompanyInfoRequest infoRequest = new GetCompanyInfoRequest(new CompanyInstance(id));
             GetCompanyInfoResponse infoResponse = connection.getCompanyInfo(infoRequest);
             ViewBag.CompanyInfo = infoResponse.companyInfo;
+            location = infoResponse.companyInfo.locations[0];
 
             CompanyReviewSearchRequest reviewRequest = new CompanyReviewSearchRequest(id);
             CompanyReviewResponse reviewResponse = connection.searchCompanyReview(reviewRequest);
-
             ViewBag.Reviewlist = reviewResponse.reviews;
+
+            WeatherNeededRequest weatherRequest = new WeatherNeededRequest(location);
+            WeatherNeededResponse weatherResponse = connection.getWeatherData(weatherRequest);
+            ViewBag.WeatherData = weatherResponse.weatherData;
+           
             return View("DisplayCompany");
         }
     }

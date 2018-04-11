@@ -1,23 +1,38 @@
 ﻿<link href="~/Content/ChatStyles.css" rel="stylesheet" type="text/css" />
+
 <script type="text/javascript" src="~/Scripts/jquery-1.10.2.min.js"></script>
 <script type="text/javascript" src="~/Scripts/CompanyListings/CompanyListingsFunctions.js"></script>
 
 <h2 id="CompanyNameDisplay">@ViewBag.CompanyName</h2>
+<section class="container">
+    <div class="row">
+        <div class="col-sm-6"
+        <br />
+        <p>Email: @ViewBag.CompanyInfo.email</p>
+        <br />
+        <p>Phone Number: @ViewBag.CompanyInfo.phoneNumber</p>
+        <br />
+        <p>@ViewBag.CompanyName can be found at these locations:</p>
+        <br />
 
-<br />
-<p>Email: @ViewBag.CompanyInfo.email</p>
-<br />
-<p>Phone Number: @ViewBag.CompanyInfo.phoneNumber</p>
-<br />
-<p>@ViewBag.CompanyName can be found at these locations:</p>
-<br />
+        @foreach(string location in ViewBag.CompanyInfo.locations)
+        {
+            <p style="padding-left:4em;">@location</p>
+            <br />
+        }
+        </div>
+        <div class="col-sm-6">
+            <h3>@ViewBag.CompanyInfo.locations[0]</h3>
+            <p>@ViewBag.WeatherData.weatherText</p>
+            <figure class="col-sm-3">
+                <img src="@Url.Content("~\\Views\\CompanyListings\\Icons\\" + @ViewBag.WeatherData.iconNum + "\\icon.png")">
+                <p>Feels like: </p>
+            </figure>
+            <p class="col-sm-3">@ViewBag.WeatherData.temp @ViewBag.WeatherData.tempUnit</p>
 
-@foreach(string location in ViewBag.CompanyInfo.locations)
-{
-    <p style="padding-left:4em;">@location</p>
-    <br />
-}
-
+        </div>
+    </div>
+</section>
 
 <div style="height:100px">
     <h4>Start a conversation with @ViewBag.CompanyName</h4>
@@ -33,21 +48,21 @@
     <h4>@ViewBag.CompanyName Reviews:</h4>
     @if (ViewBag.Reviewlist != null)
     {
-        if (ViewBag.Reviewlist.reviews.Count == 0)
+        if (ViewBag.Reviewlist.Count == 0)
         {
             <p>This company does not have any reviews. Be the first!</p>
         }
         else
         {
             <p style="font-size:larger">Results:</p> <br />
-            foreach (string item in ViewBag.Reviewlist.reviews)
+            foreach (var item in ViewBag.Reviewlist)
             {
                 //@Html.ActionLink(item, "DisplayCompany/" + item, "CompanyListings")
                 //TODO add this stuff when list structure is known
-                <p>Username: item.username</p>
-                <p>Stars: stars</p>
-                <p>Review: review</p>
-                <p>Timestamp: timestamp</p>
+                <p>Username: @item.username</p>
+                <p>Stars: @item.stars</p>
+                <p>Review: @item.review</p>
+                <p>Timestamp: @item.timestamp</p>
                 <br />
             }
         }
@@ -55,13 +70,14 @@
 </div>
 <div>
     <h4>Leave a review for @ViewBag.CompanyName</h4>
-    @using (Html.BeginForm("FrontPage", "Home"))
+    @using (Html.BeginForm("Review", "CompanyListings"))
     {
         <div class="form-group">
+            <label>Company Review</label>
             @Html.TextBox("companyReview")
         </div>
         <div class="form-group">
-            <label></label>
+            <label>Stars</label>
             @Html.TextBox("companyStars")
         </div>
         <input type="submit" value="Review" />
