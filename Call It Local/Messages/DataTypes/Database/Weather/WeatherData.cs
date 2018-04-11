@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace Messages.DataTypes
 {
+    [Serializable]
     public class WeatherData
     {
         public WeatherData(string temp, string tempUnit, string realTemp, string realTempUnit, string weatherText, string iconNum)
