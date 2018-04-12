@@ -40,7 +40,7 @@ namespace EchoService.Handlers
         /// <returns>Nothing</returns>
         public Task Handle(WeatherNeededRequest message, IMessageHandlerContext context)
         {
-            string apiKey = "jIuGVibBuDNp7QRnPJ0HWfvAiuzaQINC";
+            string apiKey = "s4FAawn3XfbbA2rsgGtqyFKBWPZ3opvc";
             string city = message.location;
             string url = "https://dataservice.accuweather.com/locations/v1/cities/search?apikey=" +
                 apiKey + "&q=" + city;
@@ -56,7 +56,7 @@ namespace EchoService.Handlers
                 JArray json = JArray.Parse(response);
 
                 if(!json.HasValues)
-                    return context.Reply(new ServiceBusResponse(false, "FAILED to add review"));
+                    return context.Reply(new WeatherNeededResponse(false, "FAILED to add review", null));
 
 
                 //Get weather data based on the key
