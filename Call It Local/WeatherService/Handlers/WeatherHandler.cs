@@ -53,9 +53,11 @@ namespace EchoService.Handlers
                 HttpResponseMessage wcfresponse = httpClient.GetAsync(url).GetAwaiter().GetResult();
                 string response = wcfresponse.Content.ReadAsStringAsync().GetAwaiter().GetResult();
                 
-                var json = JArray.Parse(response);
+                JArray json = JArray.Parse(response);
 
-             
+                if(!json.HasValues)
+                    return context.Reply(new ServiceBusResponse(false, "FAILED to add review"));
+
 
                 //Get weather data based on the key
                 string extractedKey = json[0].Value<string>("Key");
@@ -78,7 +80,7 @@ namespace EchoService.Handlers
             }
             catch
             {
-
+                return context.Reply(new ServiceBusResponse(false, "FAILED to find weather"));
             }
 
             return context.Reply(new ServiceBusResponse(false, "FAILED to add review"));

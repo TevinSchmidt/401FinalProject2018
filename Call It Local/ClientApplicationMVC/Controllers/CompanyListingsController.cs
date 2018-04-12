@@ -1,5 +1,5 @@
 ﻿using ClientApplicationMVC.Models;
-
+using Messages.DataTypes;
 using Messages.DataTypes.Database.CompanyDirectory;
 using Messages.ServiceBusRequest;
 using Messages.ServiceBusRequest.CompanyDirectory.Responses;
@@ -126,7 +126,15 @@ namespace ClientApplicationMVC.Controllers
 
             WeatherNeededRequest weatherRequest = new WeatherNeededRequest(location);
             WeatherNeededResponse weatherResponse = connection.getWeatherData(weatherRequest);
-            ViewBag.WeatherData = weatherResponse.weatherData;
+            if (!weatherResponse.result) {
+                WeatherData wd = new WeatherData("not available", "not available", "not available", "not available", "not available", "not available");
+                ViewBag.WeatherData = wd;
+            }
+            else {
+                ViewBag.WeatherData = weatherResponse.weatherData;
+            }
+                
+      
            
             return View("DisplayCompany");
         }
